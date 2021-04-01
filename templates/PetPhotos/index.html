@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% extends 'PetPhotos/base.html' %}
+{% load staticfiles %}
 
 <html>
     {% block title_block %}
@@ -10,6 +11,7 @@
     <div style="text-align: center;">
     <h1> Welcome to PetPhotos</h1>
     <p>PetPhotos is an app that allows you to upload and share photos of your pets</p>
+    <img src="{% static 'images/petphotos.jpg'%}" />
     </div>
     {% endblock %}
 </html>
