@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% extends 'PetPhotos/base.html' %}
+
+<html>
+    {% block title_block %}
+        {% if pet %}
+            {{pet.name}}
+        {% else %}
+            Unknown Pet
+        {% endif %}
+    {% endblock %}
+
+    {% block body_block %}
+        {% if pet %}
+            <h1>{{pet.name}}</h1> <!--Pet name at head of the page-->
+            {% if pet.owner %}
+                <h2>Owned by {{pet.owner.name}}</h2> <!--Display owner's name-->
+            {% endif %}
+        {% else %}
+        <h1>We couldn't find that pet</h1>
+        {% endif %}
+    {% endblock %}
+</html>
