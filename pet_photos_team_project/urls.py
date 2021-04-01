@@ -20,5 +20,6 @@ from PetPhotos import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('petphotos/', include('PetPhotos.urls')),
     path('admin/', admin.site.urls),
 ]
