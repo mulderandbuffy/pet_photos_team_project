@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% extends PetPhotos/base.html %}
+{% load staticfiles %}
+
+<html>
+    {% block title_block %}
+        {% if user %}
+            User - {{user.name}}
+        {% else %}
+            User - Unknown
+        {% endif %}
+    {% endblock %}
+
+    {% block body_block %}
+    <div style="float: left;">
+        <h1>{{user.name}}</h1>
+    </div>
+    <div style="float: right;">
+        <img src="{{MEDIA_URL}}{{user.picture}}" alt="{{user.name}}">
+    </div>
+    <hr>
+    {% endblock %}
+</html>
