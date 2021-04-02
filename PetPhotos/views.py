@@ -5,3 +5,5 @@ from django.http import HttpResponse
 def index(request):
     response = render(request, 'PetPhotos/index.html')
     return response
+
+#No view pet profile view until slugs work
