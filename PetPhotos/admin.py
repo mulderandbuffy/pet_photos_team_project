@@ -13,7 +13,7 @@ admin.site.register(Pet, PetAdmin)
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'creation_date')
+    list_display = ('name', 'creation_date', 'slug')
 
 
 admin.site.register(Category, CategoryAdmin)

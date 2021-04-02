@@ -1,9 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-<<<<<<< HEAD
 from django.template.defaultfilters import slugify
-=======
->>>>>>> f90261c3cccac6d8b3f066d838312082ecfd3acb
 
 
 class Pet(models.Model):
@@ -29,14 +26,13 @@ class UserProfile(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=128, unique=True)
     creation_date = models.DateTimeField(auto_now_add=True)
-<<<<<<< HEAD
+
     slug = models.SlugField()
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Category, self).save(*args, **kwargs)
-=======
->>>>>>> f90261c3cccac6d8b3f066d838312082ecfd3acb
+
 
     class Meta:
         verbose_name_plural = 'Categories'
