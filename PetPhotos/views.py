@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from PetPhotos.models import Category
-from PetPhotos.forms import CategoryForm
+from PetPhotos.forms import CategoryForm, UserForm, UserProfileForm
 from django.utils.decorators import method_decorator
 from django.views import View
 
@@ -57,3 +57,34 @@ class LikePictureView(View):
 
         return HttpResponse(picture.rating)
 
+def register(request):
+
+   registered = True
+   
+   if request.method == 'POST':
+       user_form = UserForm(request.POST)
+       profile_form = UserProfileForm(request.POST)
+       
+       if user_form.is_valid() and profile_form.is_valid():
+          user = user_form.save()
+          user.set_password(user.password)
+          user.save()
+          profile = profile_form.save(commit=False)
+          profile.user = user
+          
+          if 'picture' in request.FILES:
+             profile.picture = request.FILES['picture']
+             
+          profile.save()
+          registered = True
+          
+       else:
+         
+          print(user_form.errors, profile_form.errors)
+    
+   else:
+   
+      user_form = UserForm()
+      profile_form = UserProfileForm()
+ 
+   return render(request,  'PetPhotos/register.html', context = {'user_form': user_form, 'profile_form': profile_form, 'registers': registered })

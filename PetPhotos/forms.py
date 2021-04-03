@@ -1,5 +1,6 @@
 from django import forms
-from PetPhotos.models import Category
+from PetPhotos.models import Category, UserProfile
+from django.contrib.auth.models import User
 
 
 class CategoryForm(forms.ModelForm):
@@ -11,3 +12,15 @@ class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ('name',)
+
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+    
+    class Meta:
+       model = User
+       fields = ('username', 'email', 'password', )
+       
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+       model = UserProfile
+       fields = ('picture',)

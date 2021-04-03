@@ -27,18 +27,23 @@
     <body>
         <header>
             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark p-0">
-                <a class="navbar-brand p-2" href="{% url 'petphotos:index' %}">PetPhotos</a>
+                <a class="navbar-brand p-2" href="{% url 'index' %}">PetPhotos</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'petphotos:index' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
                         
                     </ul>
                 </div>
             </nav>
         </header>
+        <ul>
+        <li><a href="{% url 'PetPhotos:add_category' %}">Add a New Category</a></li>
+        <li><a href="{% url 'PetPhotos:index' %}">Index</a></li>
+        <li><a href="{% url 'PetPhotos:register' %}">Sign Up</a></li>
+        </ul>
         
         <div class="container-fluid">
             <!-- SIDEBAR, CAN ADD IN LATER-->
