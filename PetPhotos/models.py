@@ -37,9 +37,11 @@ class Category(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(unique=True, default='')
 
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Category, self).save(*args, **kwargs)
+
 
     class Meta:
         verbose_name_plural = 'Categories'
