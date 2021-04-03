@@ -4,8 +4,9 @@ from PetPhotos.models import Category
 from PetPhotos.forms import CategoryForm, UserForm, UserProfileForm
 from django.utils.decorators import method_decorator
 from django.views import View
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     response = render(request, 'PetPhotos/index.html')
@@ -111,3 +112,13 @@ def user_login(request):
           return HttpResponse("Invalid details entered.")
     else:
         return render(request, 'PetPhotos/login.html')
+        
+@login_required
+def restricted(request):
+   return HttpResponse("Enjoy uploading pictures of your pets!")
+
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('PetPhotos:index'))

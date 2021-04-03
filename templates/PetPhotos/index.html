@@ -17,9 +17,14 @@
     <hr>
     <div style="text-align: center;">
         {% if user.is_authenticated %}
-        <strong>Welcome back {{user.name}}<!--VIEW ACCOUNT--></strong>
+           <strong>Welcome back {{ user.name }}<!--VIEW ACCOUNT--></strong>
+           <li><a href="{% url 'PetPhotos:logout' %}">Logout</a></li>
+           <li><a href="{% url 'PetPhotos:restricted' %}">Restricted</a></li>
+           <li><a href="{% url 'PetPhotos:add_category' %}">Add a New Category</a></li>
         {% else %}
-        <strong>You're not logged in. <!--SIGN UP--></strong>
+           <strong>You're not logged in. <!--SIGN UP--></strong>
+           <li><a href="{% url 'PetPhotos:register' %}">Sign Up</a></li>
+           <li><a href="{% url 'PetPhotos:login' %}">Login</a></li>
         {% endif %}
     </div>
     {% endblock %}
