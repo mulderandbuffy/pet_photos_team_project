@@ -1,3 +1,27 @@
 <!DOCTYPE html>
 {% extends PetPhotos/base.html}
 {% load staticfiles %}
+
+<html>
+    {% block title_block %}
+    Add a New Pet
+    {% endblock %}
+
+    {% block body_block %}
+    <h1>Add a New Pet</h1>
+    <div>
+        <form id="PetForm" method="POST" action="/PetPhotos/addpet/">
+        {% csrf_token %}
+        {% for field in form.hidden_fields %}
+            {{hidden}}
+        {% endfor %}
+        {% for field in form.visible_fields %}
+            {{field.errors}}
+            {{field.help_text}}
+            {{field}}
+        {% endfor %}
+        <input type="submit" name = "submit" value="Create Category" />
+        </form>
+    </div>
+    {% endblock %}
+</html>

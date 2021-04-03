@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from PetPhotos.models import Category
-from PetPhotos.forms import CategoryForm
+from PetPhotos.models import Category, Pet, User
+from PetPhotos.forms import CategoryForm, PetForm
 from django.utils.decorators import method_decorator
 from django.views import View
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -53,4 +54,24 @@ class LikePictureView(View):
         picture.save()
 
         return HttpResponse(picture.rating)
+
+#@login_required
+def add_pet(request):
+    #POST?
+    if request.method == 'POST':
+        form = PetForm(request.POST, request.FILES)
+
+        if form.is_valid:
+            pet = form.save(commit=False)
+            pet.owner = UserProfile.objects.get(request.user)
+
+            if 'picture' in request.FILES:
+                pet.picture = request.FILES['picture']
+
+        else:
+            print(form.errors)
+
+        pet.save()
+    return render(request, 'PetPhotos/addpet.html', {'form':form})
+
 

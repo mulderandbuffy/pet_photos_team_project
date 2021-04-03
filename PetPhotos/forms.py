@@ -1,5 +1,5 @@
 from django import forms
-from PetPhotos.models import Category
+from PetPhotos.models import Category, Pet
 
 
 class CategoryForm(forms.ModelForm):
@@ -11,3 +11,14 @@ class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ('name',)
+
+class PetForm(forms.ModelForm):
+    name = forms.CharField(max_length=128,
+    help_text="Enter your pet's name")
+    picture = forms.ImageField(help_text="Upload a photo of your pet")
+    slug = forms.CharField(widget=forms.HiddenInput(), required = False)
+
+
+    class Meta:
+        model = Pet
+        fields = ('name', 'picture')
