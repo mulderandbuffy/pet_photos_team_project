@@ -9,7 +9,7 @@
 <h1> Register for PetPhotos</h1>
 {% if registered %}
 <strong>PetPhotos welcomes you to the team!</strong>
-<a href="{% url 'PetPhotos:index' %}"> Return to Home.</a><br />
+<a href="{% url 'PetPhotos:index' %}"> Return Home.</a><br />
 {% else %}
 <strong>Please register here.</strong><br />
 <form id="user_form" method="post" action="{% url 'PetPhotos:register' %}" enctype = "multipart/form-data">
