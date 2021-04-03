@@ -9,9 +9,6 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 admin.site.register(UserProfile, UserProfileAdmin)
 
-<<<<<<< HEAD
-=======
-
 
 class PetAdmin(admin.ModelAdmin):
     list_display = ('name', 'owner', 'slug')
@@ -20,7 +17,7 @@ class PetAdmin(admin.ModelAdmin):
 admin.site.register(Pet, PetAdmin)
 
 
->>>>>>> origin/main
+
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'creation_date', 'slug')
 
@@ -40,8 +37,3 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Comment, CommentAdmin)
-<<<<<<< HEAD
-=======
-
-
->>>>>>> origin/main
