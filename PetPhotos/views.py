@@ -1,13 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from PetPhotos.models import Category
-from PetPhotos.forms import CategoryForm
+from PetPhotos.forms import CategoryForm, UserForm, UserProfileForm
 from django.utils.decorators import method_decorator
 from django.views import View
+from django.contrib.auth import authenticate, login
+from django.urls import reverse
 
-
-
-# Create your views here.
 def index(request):
     response = render(request, 'PetPhotos/index.html')
     return response
@@ -16,12 +15,18 @@ def show_category(request, category_name_slug):
     context_dict = {}
     try:
         category = Category.objects.get(slug=category_name_slug)
+
+        context_dict['category'] = category
+    except Category.DoesNotExist:
+        context_dict['category'] = None
+
         pictures = Picture.objects.filter(category=category)
         context_dict['pictures'] = pictures
         context_dict['category'] = category
     except Category.DoesNotExist:
         context_dict['category'] = None
         context_dict['pictures'] = None
+
     return render(request, 'PetPhotos/category.html', context=context_dict)
 
 
@@ -54,3 +59,55 @@ class LikePictureView(View):
 
         return HttpResponse(picture.rating)
 
+def register(request):
+
+   registered = False
+   
+   if request.method == 'POST':
+       user_form = UserForm(request.POST)
+       profile_form = UserProfileForm(request.POST)
+       
+       if user_form.is_valid() and profile_form.is_valid():
+          user = user_form.save()
+          user.set_password(user.password)
+          user.save()
+          profile = profile_form.save(commit= False)
+          profile.user = user
+          
+          
+          if 'picture' in request.FILES:
+             profile.picture = request.FILES['picture']
+             
+          profile.save()
+          registered = True
+          
+          
+       else:
+         
+          print(user_form.errors, profile_form.errors)
+    
+   else:
+   
+      user_form = UserForm()
+      profile_form = UserProfileForm()
+ 
+   return render(request,  'PetPhotos/register.html', context = {'user_form': user_form, 'profile_form': profile_form, 'registered': registered })
+
+def user_login(request):
+    if request.method == 'POST':
+       username = request.POST.get('username')
+       password = request.POST.get('password')
+       
+       user = authenticate(username=username, password=password)
+       
+       if user:
+          if user.is_active:
+            login(request, user)
+            return redirect(reverse('PetPhotos:index'))
+          else:
+            return HttpResponse("Your account is disabled!")
+       else:
+          print("Invalid username or password. Please check the details again!")
+          return HttpResponse("Invalid details entered.")
+    else:
+        return render(request, 'PetPhotos/login.html')

@@ -10,12 +10,12 @@ class UserProfileAdmin(admin.ModelAdmin):
 admin.site.register(UserProfile, UserProfileAdmin)
 
 
-
 class PetAdmin(admin.ModelAdmin):
     list_display = ('name', 'owner', 'slug')
 
 
 admin.site.register(Pet, PetAdmin)
+
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -37,5 +37,3 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Comment, CommentAdmin)
-
-
