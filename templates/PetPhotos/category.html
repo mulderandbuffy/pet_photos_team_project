@@ -1,0 +1,27 @@
+{% extends 'PetPhotos/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    {% if category %}
+        {{ category.name }}
+    {% else %}
+        Unknown Category
+    {% endif %}
+{% endblock %}
+
+{% block body_block %}
+    {% if category %}
+    <h1>{{ category.name }}</h1>
+    {% if photos}
+    {% for photo in photos %}
+    <div>
+    <img src="{% static {{ photo.filepath }} %}"
+        alt="{{ photo.alt }}" />
+    </div>
+    {% else %}
+    <strong>No photos currently in category.</strong>
+    {% endif %}
+    {% else %}
+    The specified category does not exist.
+    {% endif %}
+{% endblock %}
