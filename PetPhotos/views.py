@@ -12,7 +12,6 @@ def index(request):
     response = render(request, 'PetPhotos/index.html')
     return response
 
-
 def show_category(request, category_name_slug):
     context_dict = {}
     try:
@@ -54,6 +53,4 @@ class LikePictureView(View):
         picture.save()
 
         return HttpResponse(picture.rating)
-
-
 
