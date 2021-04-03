@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+{% load staticfiles %}
 <html>
     <head lang="en">
         <meta charset="UTF-8" />
@@ -17,5 +17,8 @@
         <div>
             <!--Links to other pages-->
         </div>
+		<script src="{% static "js/jquery-3.3.1.min.js" %}" crossorigin="anonymous"></script>
+		<script src="{% static "js/petphotos-jquery.js" %}" crossorigin="anonymous"></script>
+		<script src="{% static "js/petphotos-ajax.js" %}" crossorigin="anonymous"></script>
     </body>
 </html>
