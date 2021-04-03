@@ -8,6 +8,11 @@ class Pet(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     picture = models.ImageField(upload_to='images', blank=True)
     about_pet = models.CharField(max_length=300, blank=True)
+    slug = models.SlugField(unique=True, default='')
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Pet, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -15,7 +20,14 @@ class Pet(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    username = models.CharField(max_length=20, unique=True, blank=False)
+    email = models.CharField(max_length=50, unique=True, blank=False)
     picture = models.ImageField(upload_to='images', blank=True)
+    slug = models.SlugField(unique=True, default='')
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.username)
+        super(UserProfile, self).save(*args, **kwargs)
 
     # last login - add and check after user interface is done------------------------------------------------
 
@@ -26,7 +38,7 @@ class UserProfile(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=128, unique=True)
     creation_date = models.DateTimeField(auto_now_add=True)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True, default='')
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -44,7 +56,7 @@ class Picture(models.Model):
     rating = models.IntegerField(default=0)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    picture = models.ImageField(upload_to='pictures', blank=False)  # upload to the file---------------------------
+    picture = models.ImageField(upload_to='pictures', blank=True)  # upload to the file + blank=False -------
     creation_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
