@@ -3,9 +3,16 @@ from PetPhotos.models import Pet, UserProfile, Category, Picture, Comment
 
 
 
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('username', 'email', 'slug')
+
+
+admin.site.register(UserProfile, UserProfileAdmin)
+
+
 
 class PetAdmin(admin.ModelAdmin):
-    list_display = ('name', 'owner')
+    list_display = ('name', 'owner', 'slug')
 
 
 admin.site.register(Pet, PetAdmin)
