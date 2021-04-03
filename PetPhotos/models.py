@@ -7,7 +7,6 @@ class Pet(models.Model):
     name = models.CharField(max_length=128)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     picture = models.ImageField(upload_to='images', blank=True)
-    about_pet = models.CharField(max_length=300, blank=True)
     slug = models.SlugField(unique=True, default='')
 
     def save(self, *args, **kwargs):
@@ -28,8 +27,6 @@ class UserProfile(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.username)
         super(UserProfile, self).save(*args, **kwargs)
-
-    # last login - add and check after user interface is done------------------------------------------------
 
     def __str__(self):
         return self.user.username
@@ -57,7 +54,7 @@ class Picture(models.Model):
     rating = models.IntegerField(default=0)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    picture = models.ImageField(upload_to='pictures', blank=True)  # upload to the file + blank=False -------
+    picture = models.ImageField(upload_to='images', blank=False)
     creation_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
