@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% extends 'PetPhotos/base.html' %}
+{% load static %}
+
+<html>
+    {% block title_block %}
+        New and Trending
+    {% endblock %}
+
+    {% block body_block %}
+    <h1>Trending</h1>
+    <div> <!--MOST LIKED IMAGES-->
+        <h4>Most Liked Pictures</h4>
+        {% if liked %}
+            {% for l in liked %}
+            <a href="{% url 'PetPhotos:view_picture' l.id %}"><img src="{{ l.picture.url }}" alt="img" style = "max-width: 500px; max-height: auto;"></a>
+            {% endfor %}
+        {% else %}
+            <strong>Nothing to See here...</strong>
+        {% endif %}
+    </div>
+    <br>
+    <div> <!--Newest images-->
+        <h4>New Pictures</h4>
+            {% if newpics %}
+            {% for p in newpics %}
+            <a href="{% url 'PetPhotos:view_picture' p.id %}"><img src="{{ p.picture.url }}" alt="img" style = "max-width: 500px; max-height: auto;"></a>
+            {% endfor %}
+            {% else %}
+            <strong>Nothing to See here...</strong>
+            {% endif %}
+    </div>
+    <br>
+    <div><!--New Categories-->
+        <h4>New Categories</h4>
+        {% if cats %}
+            {% for c in cats %}
+                <a href="{% url 'PetPhotos:show_category' c.slug %}">{{ c.name }}</a> |
+            {% endfor %}
+        {% else %}
+            <strong>Nothing to See here...</strong>
+        {% endif %}
+    </div>
+    {% endblock %}
+</html>
