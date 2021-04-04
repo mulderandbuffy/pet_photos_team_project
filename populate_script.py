@@ -23,7 +23,6 @@ def populate():
 
     for item in users:
         add_user(item["username"], item["email"], item["picture"])
-        add_user_profile(User.objects.get(username=item["username"]), item["username"], item["email"], item["picture"])
 
     # PETS
 
@@ -153,13 +152,6 @@ def add_user(username, email, picture):
     u = User.objects.get_or_create(username=username)[0]
     u.email = email
     u.picture = picture
-    u.save()
-    return u
-
-
-def add_user_profile(user, username, email, picture):
-    u = UserProfile.objects.get_or_create(user=user, username=username, email=email, picture=picture)[0]
-    u.picture.save('add_user.jpg', File(open('media/population_files/dog.jpg', 'rb')))
     u.save()
     return u
 
