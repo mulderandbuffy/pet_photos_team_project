@@ -1,5 +1,5 @@
 {% extends 'PetPhotos/base.html' %}
-{% load staticfiles %}
+{% load static %}
 
 {% block title_block %}
     {% if category %}
@@ -25,7 +25,7 @@
             </button>
             {% endif %}
         </div>
-        {% if pictures}
+        {% if pictures %}
             {% for picture in pictures %}
             <div>
                 <!-- change implementation to add new page -->
