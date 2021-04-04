@@ -1,6 +1,5 @@
-<!DOCTYPE html>
 {% extends 'PetPhotos/base.html' %}
-{% load staticfiles %}
+{% load static %}
 
 <html>
     {% block title_block %}
@@ -10,13 +9,17 @@
     {% block body_block %}
     <div style="text-align: center;">
     <h1> Welcome to PetPhotos</h1>
-    <p>PetPhotos is an app that allows you to upload and share photos of your pets</p>
-    <img style="box-sizing: border-box; height: auto; width: auto;"
+    <p>Share your pets with the world!</p>
+    <img style="box-sizing: border-box; max-width: 700px; max-height: auto;"
     src="{% static 'images/petphotos.jpg'%}" alt="An image of several pets including dogs, cats and a rabbit" />
+    </div>
+    <div style="text-align: center;">
+        <img src="{% static 'images/pplogo2.png'%}" alt="PetPhotos Logo" style="max-width: 300px; max-height: auto;"/>
     </div>
     <hr>
     <div style="text-align: center;">
         {% if user.is_authenticated %}
+<<<<<<< HEAD
            <strong>Welcome back {{ user.name }}<!--VIEW ACCOUNT--></strong>
            <li><a href="{% url 'PetPhotos:logout' %}">Logout</a></li>
            <li><a href="{% url 'PetPhotos:restricted' %}">Restricted</a></li>
@@ -25,6 +28,11 @@
            <strong>You're not logged in. <!--SIGN UP--></strong>
            <li><a href="{% url 'PetPhotos:register' %}">Sign Up</a></li>
            <li><a href="{% url 'PetPhotos:login' %}">Login</a></li>
+=======
+        <strong>Welcome back {{user.username}}</strong>
+        {% else %}
+        <strong>You're not logged in. <a href="{% url 'PetPhotos:login' %}">Log In</a> or <a href="{% url 'PetPhotos:register' %}">Register</a> <!--SIGN UP--></strong>
+>>>>>>> origin/main
         {% endif %}
     </div>
     {% endblock %}

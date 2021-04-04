@@ -2,12 +2,7 @@ from django.contrib import admin
 from PetPhotos.models import Pet, UserProfile, Category, Picture, Comment
 
 
-
-class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('username', 'email', 'slug')
-
-
-admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(UserProfile)
 
 
 class PetAdmin(admin.ModelAdmin):

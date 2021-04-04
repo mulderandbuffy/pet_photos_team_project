@@ -1,0 +1,23 @@
+{% extends 'PetPhotos/base.html' %}
+{% load static %}
+
+{% block title_block %}
+    Profiles
+{% endblock %}
+
+{% block body_block %}
+    {% if profiles %}
+         <h1>Profiles:</h1>
+         {% for p in profiles %}
+                <li>
+                    <strong>
+                        <a href="{% url 'PetPhotos:user_profile' p.username %}">{{ p.username }}</a>
+                    </strong>
+                </li>
+        {% endfor %}
+    {% else %}
+        No user exists.
+    {% endif %}
+{% endblock %}
+
+

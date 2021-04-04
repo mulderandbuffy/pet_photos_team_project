@@ -23,32 +23,31 @@ def populate():
 
     for item in users:
         add_user(item["username"], item["email"], item["picture"])
-        add_user_profile(User.objects.get(username=item["username"]), item["username"], item["email"], item["picture"])
 
     # PETS
 
     user1_animals = [
-        {'name': 'Jackie White', 'owner': User.objects.get(username='user1'), 'picture': None},
-        {'name': 'Benny Blue', 'owner': User.objects.get(username='user1'), 'picture': None},
-        {'name': 'Ally Red', 'owner': User.objects.get(username='user1'), 'picture': None}
+        {'name': 'Jackie White', 'owner': User.objects.get(username='user1'), 'picture': 'sheep.jpg'},
+        {'name': 'Benny Blue', 'owner': User.objects.get(username='user1'), 'picture': 'dog3.jpg'},
+        {'name': 'Ally Red', 'owner': User.objects.get(username='user1'), 'picture': 'racoon.jpg'}
     ]
 
     user2_animals = [
-        {'name': 'Bonnie', 'owner': User.objects.get(username='user2'), 'picture': None},
-        {'name': 'Meow', 'owner': User.objects.get(username='user2'), 'picture': None},
-        {'name': 'Beck', 'owner': User.objects.get(username='user2'),  'picture': None}
+        {'name': 'Bonnie', 'owner': User.objects.get(username='user2'), 'picture': 'mouse.png'},
+        {'name': 'Meow', 'owner': User.objects.get(username='user2'), 'picture': 'mouse2.jpg'},
+        {'name': 'Beck', 'owner': User.objects.get(username='user2'),  'picture': 'cat3.jpg'}
     ]
 
     user4_animals = [
-        {'name': 'Billy', 'owner': User.objects.get(username='user4'), 'picture': None},
-        {'name': 'Lilly', 'owner': User.objects.get(username='user4'), 'picture': None},
-        {'name': 'Minnie', 'owner': User.objects.get(username='user4'),  'picture': None}
+        {'name': 'Billy', 'owner': User.objects.get(username='user4'), 'picture': 'dog2.jpg'},
+        {'name': 'Lilly', 'owner': User.objects.get(username='user4'), 'picture': 'rabbit1.png'},
+        {'name': 'Minnie', 'owner': User.objects.get(username='user4'),  'picture': 'ant.jpg'}
     ]
 
     user5_animals = [
-        {'name': 'Micky', 'owner': User.objects.get(username='user5'), 'picture': None},
-        {'name': 'Buddy', 'owner': User.objects.get(username='user5'), 'picture': None},
-        {'name': 'I ran out of name ideas', 'owner': User.objects.get(username='user5'),  'picture': None}
+        {'name': 'Mickey', 'owner': User.objects.get(username='user5'), 'picture':'cat2.jpg'},
+        {'name': 'Buddy', 'owner': User.objects.get(username='user5'), 'picture': 'dog.jpg'},
+        {'name': 'Megatron', 'owner': User.objects.get(username='user5'),  'picture': 'birb1.jpg'}
     ]
     for item in user1_animals:
         add_pet(item["name"], item["owner"], item["picture"])
@@ -65,21 +64,21 @@ def populate():
     # PICTURES
 
     dog_pics = [
-        {'rating': 10, 'creator': User.objects.get(username='user2'), 'picture': None, 'creation_date': timezone.now()},
-        {'rating': 15, 'creator': User.objects.get(username='user1'), 'picture': None, 'creation_date': timezone.now()},
-        {'rating': 21, 'creator': User.objects.get(username='user3'), 'picture': None, 'creation_date': timezone.now()}
+        {'rating': 10, 'creator': User.objects.get(username='user2'), 'picture': 'dog.jpg', 'creation_date': timezone.now()},
+        {'rating': 15, 'creator': User.objects.get(username='user1'), 'picture': 'dog2.jpg', 'creation_date': timezone.now()},
+        {'rating': 21, 'creator': User.objects.get(username='user3'), 'picture': 'dog3.jpg', 'creation_date': timezone.now()}
     ]
 
     cat_pics = [
-        {'rating': 101, 'creator': User.objects.get(username='user2'), 'picture': None, 'creation_date': timezone.now()},
-        {'rating': 1, 'creator': User.objects.get(username='user1'), 'picture': None, 'creation_date': timezone.now()},
-        {'rating': 0, 'creator': User.objects.get(username='user3'), 'picture': None, 'creation_date': timezone.now()}
+        {'rating': 101, 'creator': User.objects.get(username='user2'), 'picture': 'bueno.jpg', 'creation_date': timezone.now()},
+        {'rating': 1, 'creator': User.objects.get(username='user1'), 'picture': 'cat2.jpg', 'creation_date': timezone.now()},
+        {'rating': 0, 'creator': User.objects.get(username='user3'), 'picture': 'cat3.jpg', 'creation_date': timezone.now()}
     ]
 
     mouse_pics = [
-        {'rating': 13, 'creator': User.objects.get(username='user4'), 'picture': None, 'creation_date': timezone.now()},
-        {'rating': 4, 'creator': User.objects.get(username='user4'), 'picture': None, 'creation_date': timezone.now()},
-        {'rating': 0, 'creator': User.objects.get(username='user6'), 'picture': None, 'creation_date': timezone.now()}
+        {'rating': 13, 'creator': User.objects.get(username='user4'), 'picture': 'mouse2.jpg', 'creation_date': timezone.now()},
+        {'rating': 4, 'creator': User.objects.get(username='user5'), 'picture': 'mouse.png', 'creation_date': timezone.now()},
+        {'rating': 0, 'creator': User.objects.get(username='user6'), 'picture': 'mouse3.jpg', 'creation_date': timezone.now()}
     ]
 
     # CATEGORIES
@@ -122,7 +121,7 @@ def populate():
 
 def add_pet(name, owner, picture):
     p = Pet.objects.get_or_create(name=name, owner=owner)[0]
-    p.picture.save('add_pet.jpg', File(open('media/population_files/test.jpg', 'rb')))
+    p.picture.save('add_pet.jpg', File(open('media/population_files/' + str(picture), 'rb')))
     return p
 
 
@@ -135,7 +134,7 @@ def add_cat(name, creation_date):
 
 def add_pic(creator, category, picture, creation_date, rating=0):
     p = Picture.objects.get_or_create(creator=creator, category=category)[0]
-    p.picture.save('add_pic.jpg', File(open('media/population_files/bueno.jpg', 'rb')))
+    p.picture.save('add_pic.jpg', File(open('media/population_files/' + str(picture), 'rb')))
     p.rating = rating
     p.creation_date = creation_date
     p.save()
@@ -153,13 +152,6 @@ def add_user(username, email, picture):
     u = User.objects.get_or_create(username=username)[0]
     u.email = email
     u.picture = picture
-    u.save()
-    return u
-
-
-def add_user_profile(user, username, email, picture):
-    u = UserProfile.objects.get_or_create(user=user, username=username, email=email, picture=picture)[0]
-    u.picture.save('add_user.jpg', File(open('media/population_files/dog.jpg', 'rb')))
     u.save()
     return u
 

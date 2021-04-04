@@ -21,14 +21,8 @@ class Pet(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    username = models.CharField(max_length=20, unique=True, blank=False)
+    username = models.CharField(max_length=20, unique=True, blank=False, primary_key=True)
     email = models.CharField(max_length=50, unique=True, blank=False)
-    picture = models.ImageField(upload_to='images', blank=True)
-    slug = models.SlugField(unique=True, default='')
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.username)
-        super(UserProfile, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.user.username
@@ -38,7 +32,6 @@ class Category(models.Model):
     name = models.CharField(max_length=128, unique=True)
     creation_date = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(unique=True, default='')
-
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -56,7 +49,7 @@ class Picture(models.Model):
     rating = models.IntegerField(default=0)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    picture = models.ImageField(upload_to='images', blank=False)
+    picture = models.ImageField(upload_to='images', blank=True)
     creation_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
