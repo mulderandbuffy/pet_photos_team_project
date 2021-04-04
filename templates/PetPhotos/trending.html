@@ -13,7 +13,7 @@
         <h4>Most Liked Pictures</h4>
         {% if liked %}
             {% for l in liked %}
-            <img src="{{ l.picture.url }}" alt="img" style = "max-width: 500px; max-height: auto;">
+            <a href="{% url 'PetPhotos:view_picture' l.id %}"><img src="{{ l.picture.url }}" alt="img" style = "max-width: 500px; max-height: auto;"></a>
             {% endfor %}
         {% else %}
             <strong>Nothing to See here...</strong>
@@ -24,7 +24,7 @@
         <h4>New Pictures</h4>
             {% if newpics %}
             {% for p in newpics %}
-            <img src="{{ p.picture.url }}" alt="img" style = "max-width: 500px; max-height: auto;">
+            <a href="{% url 'PetPhotos:view_picture' p.id %}"><img src="{{ p.picture.url }}" alt="img" style = "max-width: 500px; max-height: auto;"></a>
             {% endfor %}
             {% else %}
             <strong>Nothing to See here...</strong>
