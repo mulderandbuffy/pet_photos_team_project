@@ -14,10 +14,10 @@
         {% if pet %}
 
             <h1> Pet Profile</h1>
-            <p>Name: {{ pet.name }}</p>
-            <p>Owner: {{ pet.owner }}</p>
+            <p><b>Name:</b> {{ pet.name }}</p>
+            <p><b>Owner:</b> {{ pet.owner }}</p>
 
-            <img src="{{ pet.picture.url }}" alt="img">
+            <img src="{{ pet.picture.url }}" alt="img" style="max-width: 500px; max-height: auto;">
 
             <div style="margin: auto;">
                 <!--Add text here-->

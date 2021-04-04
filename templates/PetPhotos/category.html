@@ -28,7 +28,7 @@
         {% if pictures %}
             {% for picture in pictures %}
             <div>
-                <img src="{{ picture.picture.url }}" alt="img">
+                <img src="{{ picture.picture.url }}" alt="img" style = "max-width: 500px; max-height: auto;">
             </div>
             {% endfor %}
         {% else %}

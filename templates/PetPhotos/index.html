@@ -9,16 +9,19 @@
     {% block body_block %}
     <div style="text-align: center;">
     <h1> Welcome to PetPhotos</h1>
-    <p>PetPhotos is an app that allows you to upload and share photos of your pets</p>
-    <img style="box-sizing: border-box; height: auto; width: auto;"
+    <p>Share your pets with the world!</p>
+    <img style="box-sizing: border-box; max-width: 700px; max-height: auto;"
     src="{% static 'images/petphotos.jpg'%}" alt="An image of several pets including dogs, cats and a rabbit" />
+    </div>
+    <div style="text-align: center;">
+        <img src="{% static 'images/pplogo2.png'%}" alt="PetPhotos Logo" style="max-width: 300px; max-height: auto;"/>
     </div>
     <hr>
     <div style="text-align: center;">
         {% if user.is_authenticated %}
-        <strong>Welcome back {{user.name}}<!--VIEW ACCOUNT--></strong>
+        <strong>Welcome back {{user.username}}</strong>
         {% else %}
-        <strong>You're not logged in. <!--SIGN UP--></strong>
+        <strong>You're not logged in. <a href="{% url 'PetPhotos:login' %}">Log In</a> or <a href="{% url 'PetPhotos:register' %}">Register</a> <!--SIGN UP--></strong>
         {% endif %}
     </div>
     {% endblock %}
