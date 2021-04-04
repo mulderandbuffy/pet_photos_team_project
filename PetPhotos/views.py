@@ -6,11 +6,9 @@ from PetPhotos.forms import CategoryForm, UserForm, PetForm, PictureForm
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from django.contrib.auth import authenticate, login
-from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.models import User
-
 
 def index(request):
     response = render(request, 'PetPhotos/index.html')
@@ -194,7 +192,7 @@ def add_picture(request):
 def user_logout(request):
     logout(request)
     return redirect(reverse('PetPhotos:index'))
-
+  
 
 def view_picture(request, id):
     context_dict = {}
@@ -220,3 +218,15 @@ def like_view(request, id):
         picture.likes.add(request.user)
         liked = True
     return HttpResponseRedirect(reverse('PetPhotos:view_picture', args=str(id)))
+
+def trending(request):
+    most_liked = Picture.objects.order_by('-rating')[:3]
+    new_pictures = Picture.objects.order_by('-creation_date')[:3]
+    new_categories = Category.objects.order_by('-creation_date')[:5]
+
+    context_dict = {}
+    context_dict['liked'] = most_liked
+    context_dict['newpics'] = new_pictures
+    context_dict['cats'] = new_categories
+
+    return render(request, 'PetPhotos/trending.html', context=context_dict)
