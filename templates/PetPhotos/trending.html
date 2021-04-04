@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% extends 'PetPhotos/base.html' %}
+{% load static %}
+
+<html>
+    {% block title_block %}
+        New and Trending
+    {% endblock %}
+
+    {% block body_block %}
+    <h1>Trending</h1>
+    <div> <!--MOST LIKED IMAGES-->
+        <h2>Most Liked Pictures</h2>
+        {% if liked %}
+            <img src="{{liked.0.url}}" alt="{{liked.0.name}}" style="float: left;" />
+            <img src="{{liked.1.url}}" alt="{{liked.1.name}}" style="text-align: center;" />
+            <img src="{{liked.2.url}}" alt="{{liked.2.name}}" style="float: right;" />
+        {% else %}
+        {% endif %}
+    </div>
+    <br>
+    <div> <!--Newest images-->
+        <h2>New Pictures</h2>
+
+    </div>
+    <br>
+    <div><!--New Categories-->
+        <h2>New Categories</h2>
+    </div>
+    {% endblock %}
+</html>
