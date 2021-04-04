@@ -28,7 +28,7 @@
         {% if pictures %}
             {% for picture in pictures %}
             <div>
-                <!-- change implementation to add new page -->
+                <img src="{{ picture.picture.url }}" alt="img">
             </div>
             {% endfor %}
         {% else %}

@@ -1,6 +1,5 @@
 from django import forms
-from django.http import request
-from PetPhotos.models import Category, UserProfile, Pet, Picture
+from PetPhotos.models import Category, Pet, Picture
 from django.contrib.auth.models import User
 from django.utils import timezone
 
@@ -17,22 +16,20 @@ class CategoryForm(forms.ModelForm):
 
 class PetForm(forms.ModelForm):
     name = forms.CharField(max_length=128, help_text="Pet Name")
-    picture = forms.ImageField()
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
         model = Pet
-        fields = ('name',)
+        fields = ('name', 'picture')
 
 
 class PictureForm(forms.ModelForm):
-    name = forms.CharField(max_length=128, help_text="Please enter the category name.")
-    picture = forms.ImageField()
+    category = forms.ModelChoiceField(queryset=Category.objects.all().order_by('name'), label='Select Category')
     creation_date = timezone.now()
 
     class Meta:
         model = Picture
-        fields = ('name',)
+        fields = ('category', 'picture')
 
 
 class UserForm(forms.ModelForm):
@@ -42,8 +39,3 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'email', 'password')
 
-
-class UserProfileForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ('picture', )

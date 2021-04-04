@@ -10,20 +10,23 @@
 {% endblock %}
 
 {% block body_block %}
-    <p>Username: {{ user.username }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>Pets:</p>
-    {% if pets %}
-         {% for p in pets %}
-                <li>
-                    <strong>
+    {% if user %}
+        <h1> User Profile</h1>
+        <p>Username: {{ user.username }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Pets:</p>
+        {% if pets %}
+             {% for p in pets %}
+                    <li>
                         <a href="{% url 'PetPhotos:viewpetprofile' p.slug %}">{{ p.name }}</a>
-                    </strong>
-                </li>
-        {% endfor %}
-    {% else %}
-        This user has no pets.
-    {% endif %}
+                    </li>
+            {% endfor %}
+        {% else %}
+            This user has no pets.
+        {% endif %}
+   {% else %}
+        This user doesn't exist.
+   {% endif %}
 {% endblock %}
 
 
