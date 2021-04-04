@@ -30,7 +30,33 @@
             {% endif %}
             <a>Number of Likes: {{ likes }}</a>
 
+            <br>
+            <h2>Comments</h2>
 
+            <form method="post">
+                {% if user.is_authenticated %}
+                    {% csrf_token %}
+                    {{ comment_form.as_p }}
+                    <input type="submit" value="Submit" class="btn btn-outline-success">
+                {% endif %}
+            </form>
+
+            <br>
+            <br>
+            {% if comments %}
+                <hr>
+                {% for comment in comments %}
+                    <strong> {{ comment.creator }} - {{ comment.creation_date }} </strong>
+                    <br>
+                    {{ comment.comment }}
+                    <br>
+                    <hr>
+                {% endfor %}
+            {% else %}
+                 No comments yet...
+                <br>
+                <br>
+            {% endif %}
         {% else %}
             <h1>This picture doesn't exist.</h1>
         {% endif %}

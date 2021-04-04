@@ -20,7 +20,7 @@ admin.site.register(Category, CategoryAdmin)
 
 
 class PictureAdmin(admin.ModelAdmin):
-    list_display = ('id', 'rating', 'creator', 'category', 'creation_date')
+    list_display = ('id', 'creator', 'category', 'creation_date')
 
 
 admin.site.register(Picture, PictureAdmin)
