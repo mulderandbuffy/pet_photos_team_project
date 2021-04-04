@@ -5,11 +5,9 @@ from PetPhotos.forms import CategoryForm, UserForm, UserProfileForm, PetForm, Pi
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from django.contrib.auth import authenticate, login
-from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.models import User
-
 
 def index(request):
     response = render(request, 'PetPhotos/index.html')

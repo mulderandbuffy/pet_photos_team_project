@@ -34,6 +34,7 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+
                         <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:categories' %}">Categories</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:user_profiles' %}">Profiles</a></li>
                         {% if user.is_authenticated %}
@@ -45,11 +46,11 @@
                             <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:login' %}">Log In</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:register' %}">Register</a></li>
                         {% endif %}
-
                     </ul>
                 </div>
             </nav>
         </header>
+       
         
         <div class="container-fluid">
             <!-- SIDEBAR, CAN ADD IN LATER-->
@@ -80,5 +81,4 @@
 		<script type='text/javascript' src="{% static ' js/petphotos-ajax.js' %} " crossorigin="anonymous"></script>
 
     </body>
-
 </html>

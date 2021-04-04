@@ -16,6 +16,7 @@ class PetAdmin(admin.ModelAdmin):
 admin.site.register(Pet, PetAdmin)
 
 
+
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'creation_date', 'slug')
 
