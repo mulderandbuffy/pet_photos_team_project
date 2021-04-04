@@ -48,6 +48,7 @@
 
                         <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:categories' %}">Categories</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:user_profiles' %}">Profiles</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:trending' %}">Trending</a></li>
                         {% if user.is_authenticated %}
                             <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:add_category' %}">Add Category</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:add_pet' %}">Add Pet</a></li>

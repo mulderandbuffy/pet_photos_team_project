@@ -191,3 +191,16 @@ def add_picture(request):
 def user_logout(request):
     logout(request)
     return redirect(reverse('PetPhotos:index'))
+
+
+def trending(request):
+    most_liked = Picture.objects.order_by('-rating')[:3]
+    new_pictures = Picture.objects.order_by('-creation_date')[:3]
+    new_categories = Category.objects.order_by('-creation_date')[:5]
+
+    context_dict = {}
+    context_dict['liked'] = most_liked
+    context_dict['newpics'] = new_pictures
+    context_dict['cats'] = new_categories
+
+    return render(request, 'PetPhotos/trending.html', context=context_dict)
