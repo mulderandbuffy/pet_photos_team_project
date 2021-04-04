@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load pp_template_tags %}
 
     <!--BOOTSTRAP-->
 <html lang="en">
@@ -44,6 +45,7 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+
                         <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:categories' %}">Categories</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:user_profiles' %}">Profiles</a></li>
                         {% if user.is_authenticated %}
@@ -55,20 +57,28 @@
                             <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:login' %}">Log In</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:register' %}">Register</a></li>
                         {% endif %}
-
                     </ul>
                 </div>
             </nav>
         </header>
+       
         
         <div class="container-fluid">
-            <!-- SIDEBAR, CAN ADD IN LATER-->
+            <div class="row">
+                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                    <div class="sidebar-sticky">
+                    {% block sidebar_block %}
+                        {% get_category_list category %}
+                    {% endblock %}
+                    </div>
+                </nav>
                 
                 <main role="main" class="col-md-9  ml-sm-auto col-lg-10 px-4">		
                     {% block body_block %}{% endblock %}
                     
                     <!-- FOOTER -->
                     <footer>
+                        <hr>
                         <p class="float-right"><a href="#">Back to top</a></p>
                         <p>&copy; 2021 WAD2 Team 5F &middot; <!--<a href="#">Privacy</a> &middot; <a href="#">Terms</a>--></p>
                     </footer>
@@ -90,5 +100,4 @@
 		<script type='text/javascript' src="{% static ' js/petphotos-ajax.js' %} " crossorigin="anonymous"></script>
 
     </body>
-
 </html>
