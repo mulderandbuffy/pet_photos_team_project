@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from PetPhotos.models import Category, Picture, UserProfile, Pet
-from PetPhotos.forms import CategoryForm, UserForm, UserProfileForm, PetForm, PictureForm
+from PetPhotos.forms import CategoryForm, UserForm, PetForm, PictureForm
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views import View
@@ -18,11 +18,6 @@ def show_category(request, category_name_slug):
     context_dict = {}
     try:
         category = Category.objects.get(slug=category_name_slug)
-
-        context_dict['category'] = category
-    except Category.DoesNotExist:
-        context_dict['category'] = None
-
         pictures = Picture.objects.filter(category=category)
         context_dict['pictures'] = pictures
         context_dict['category'] = category
@@ -43,7 +38,7 @@ def categories(request):
 
 def user_profiles(request):
     context_dict = {}
-    profiles = UserProfile.objects.order_by('username')
+    profiles = User.objects.order_by('username')
     context_dict['profiles'] = profiles
 
     return render(request, 'PetPhotos/user_profiles.html', context=context_dict)
@@ -51,7 +46,7 @@ def user_profiles(request):
 
 def user_profile(request, username):
     context_dict = {}
-    user = UserProfile.objects.get(username=username)
+    user = User.objects.get(username=username)
     pets = Pet.objects.filter(owner=User.objects.get(username=user.username))
     context_dict['user'] = user
     context_dict['pets'] = pets
@@ -105,33 +100,22 @@ def register(request):
 
     if request.method == 'POST':
         user_form = UserForm(request.POST)
-        profile_form = UserProfileForm(request.POST)
 
-        if user_form.is_valid() and profile_form.is_valid():
+        if user_form.is_valid():
             user = user_form.save()
 
             user.set_password(user.password)
             user.save()
 
-            profile = profile_form.save(commit=False)
-            profile.user = user
-
-            if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
-
-            profile.save()
-
             registered = True
 
         else:
-            print(user_form.errors, profile_form.errors)
+            print(user_form.errors)
 
     else:
         user_form = UserForm()
-        profile_form = UserProfileForm()
 
-    return render(request, 'PetPhotos/register.html', context={'user_form': user_form, 'profile_form': profile_form,
-                                                               'registered': registered})
+    return render(request, 'PetPhotos/register.html', context={'user_form': user_form, 'registered': registered})
 
 
 def user_login(request):
@@ -160,9 +144,16 @@ def add_pet(request):
 
     if request.method == 'POST':
         form = PetForm(request.POST)
-
         if form.is_valid():
-            form.save(commit=True)
+
+            pet = form.save(commit=False)
+            pet.owner = request.user
+
+            if 'picture' in request.FILES:
+                pet.picture = request.FILES['picture']
+
+            pet.save()
+
             return redirect('/PetPhotos/')
 
         else:
@@ -177,9 +168,17 @@ def add_picture(request):
 
     if request.method == 'POST':
         form = PictureForm(request.POST)
-
         if form.is_valid():
-            form.save(commit=True)
+
+            picture = form.save(commit=False)
+            print("im here")
+            picture.creator = request.user
+
+            if 'picture' in request.FILES:
+                picture.picture = request.FILES['picture']
+
+            picture.save()
+
             return redirect('/PetPhotos/')
 
         else:
