@@ -14,21 +14,11 @@
         <h1>{{ category.name }}</h1>
         <br>
         <div>
-            <strong id="like_count">{{ picture.rating }}</strong> likes
-            {% if user.is_authenticated %}
-            <button id="like_btn"
-                    data-pictureid="{{ picture.id }}"
-                    class="btn btn-primary btn-sm"
-                    type="button">
-                <span data-feather="thumbs-up"></span>
-                Like
-            </button>
-            {% endif %}
         </div>
         {% if pictures %}
             {% for picture in pictures %}
             <div>
-                <img src="{{ picture.picture.url }}" alt="img" style = "max-width: 500px; max-height: auto;">
+                <a href="{% url 'PetPhotos:view_picture' picture.id %}"><img src="{{ picture.picture.url }}" alt="img" style = "max-width: 500px; max-height: auto;"></a>
             </div>
             {% endfor %}
         {% else %}

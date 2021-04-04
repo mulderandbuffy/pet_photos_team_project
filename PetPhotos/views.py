@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+import self
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from PetPhotos.models import Category, Picture, UserProfile, Pet
+from PetPhotos.models import Category, Picture, Pet
 from PetPhotos.forms import CategoryForm, UserForm, PetForm, PictureForm
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -171,7 +172,7 @@ def add_picture(request):
         if form.is_valid():
 
             picture = form.save(commit=False)
-            print("im here")
+
             picture.creator = request.user
 
             if 'picture' in request.FILES:
@@ -191,7 +192,32 @@ def add_picture(request):
 def user_logout(request):
     logout(request)
     return redirect(reverse('PetPhotos:index'))
+  
 
+def view_picture(request, id):
+    context_dict = {}
+    picture = Picture.objects.get(id=id)
+
+    liked = False
+    if picture.likes.filter(id=request.user.id).exists():
+        liked = True
+
+    context_dict['picture'] = picture
+    context_dict['likes'] = picture.number_of_likes()
+    context_dict['liked'] = liked
+    return render(request, 'PetPhotos/view_picture.html', context=context_dict)
+
+
+def like_view(request, id):
+    picture = get_object_or_404(Picture, id=request.POST.get('post_id'))
+    liked = False
+    if picture.likes.filter(id=request.user.id).exists():
+        picture.likes.remove(request.user)
+        liked = False
+    else:
+        picture.likes.add(request.user)
+        liked = True
+    return HttpResponseRedirect(reverse('PetPhotos:view_picture', args=str(id)))
 
 def trending(request):
     most_liked = Picture.objects.order_by('-rating')[:3]

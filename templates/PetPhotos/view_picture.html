@@ -1,0 +1,39 @@
+{% extends 'PetPhotos/base.html' %}
+
+<html>
+    {% block title_block %}
+        {% if picture %}
+            Picture from category {{ picture.category }}
+        {% else %}
+            Unknown Picture
+        {% endif %}
+    {% endblock %}
+
+    {% block body_block %}
+
+        {% if picture %}
+
+            <img src="{{ picture.picture.url }}" alt="img">
+            <br>
+            {% if user.is_authenticated %}
+                <form action="{% url 'PetPhotos:like_post' picture.id %}" method="POST">
+                    {% csrf_token %}
+
+                    {% if liked %}
+                        <button type="submit" name="post_id" value="{{ picture.id }}" class="btn btn-danger">Unlike</button>
+                    {% else %}
+                        <button type="submit" name="post_id" value="{{ picture.id }}" class="btn btn-primary">Like</button>
+                    {% endif %}
+
+
+                </form>
+            {% endif %}
+            <a>Number of Likes: {{ likes }}</a>
+
+
+        {% else %}
+            <h1>This picture doesn't exist.</h1>
+        {% endif %}
+
+    {% endblock %}
+</html>

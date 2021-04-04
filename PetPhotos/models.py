@@ -46,11 +46,15 @@ class Category(models.Model):
 
 class Picture(models.Model):
     id = models.AutoField(primary_key=True)
-    rating = models.IntegerField(default=0)
+    rating = models.IntegerField(default=0)  # get rid of this + update population script ------------------------
+    likes = models.ManyToManyField(User, related_name='picture_like')
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     picture = models.ImageField(upload_to='images', blank=True)
     creation_date = models.DateTimeField(auto_now_add=True)
+
+    def number_of_likes(self):
+        return self.likes.count()
 
     def __str__(self):
         return str(self.id)
