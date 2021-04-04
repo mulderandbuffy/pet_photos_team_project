@@ -195,8 +195,10 @@ def user_logout(request):
 
 def trending(request):
     most_liked = Picture.objects.order_by('-rating')[:3]
+    new_pictures = Picture.objects.order_by('-creation_date')[:3]
 
     context_dict = {}
     context_dict['liked'] = most_liked
+    context_dict['newpics'] = new_pictures
 
     return render(request, 'PetPhotos/trending.html', context=context_dict)

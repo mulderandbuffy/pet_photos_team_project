@@ -10,22 +10,29 @@
     {% block body_block %}
     <h1>Trending</h1>
     <div> <!--MOST LIKED IMAGES-->
-        <h2>Most Liked Pictures</h2>
+        <h4>Most Liked Pictures</h4>
         {% if liked %}
-            <img src="{{liked.0.url}}" alt="{{liked.0.name}}" style="float: left;" />
-            <img src="{{liked.1.url}}" alt="{{liked.1.name}}" style="text-align: center;" />
-            <img src="{{liked.2.url}}" alt="{{liked.2.name}}" style="float: right;" />
+            {% for l in liked %}
+            <img src="{{ l.picture.url }}" alt="img" style = "max-width: 500px; max-height: auto;">
+            {% endfor %}
         {% else %}
+            <strong>Nothing to See here...</strong>
         {% endif %}
     </div>
     <br>
     <div> <!--Newest images-->
-        <h2>New Pictures</h2>
-
+        <h4>New Pictures</h4>
+            {% if newpics %}
+            {% for p in newpics %}
+            <img src="{{ p.picture.url }}" alt="img" style = "max-width: 500px; max-height: auto;">
+            {% endfor %}
+        {% else %}
+            <strong>Nothing to See here...</strong>
+        {% endif %}
     </div>
     <br>
     <div><!--New Categories-->
-        <h2>New Categories</h2>
+        <h4>New Categories</h4>
     </div>
     {% endblock %}
 </html>
