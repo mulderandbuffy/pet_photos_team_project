@@ -46,7 +46,6 @@ class Category(models.Model):
 
 class Picture(models.Model):
     id = models.AutoField(primary_key=True)
-    rating = models.IntegerField(default=0)  # get rid of this + update population script ------------------------
     likes = models.ManyToManyField(User, related_name='picture_like')
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)

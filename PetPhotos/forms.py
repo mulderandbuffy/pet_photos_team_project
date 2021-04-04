@@ -1,5 +1,5 @@
 from django import forms
-from PetPhotos.models import Category, Pet, Picture
+from PetPhotos.models import Category, Pet, Picture, Comment
 from django.contrib.auth.models import User
 from django.utils import timezone
 
@@ -40,3 +40,11 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'email', 'password')
 
+
+class CommentForm(forms.ModelForm):
+    comment = forms.CharField(widget=forms.TextInput(attrs={'size': 80}))
+    creation_date = timezone.now()
+
+    class Meta:
+        model = Comment
+        fields = ('comment',)

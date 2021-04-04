@@ -1,8 +1,8 @@
 #import self
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from PetPhotos.models import Category, Picture, Pet
-from PetPhotos.forms import CategoryForm, UserForm, PetForm, PictureForm
+from PetPhotos.models import Category, Picture, Pet, Comment
+from PetPhotos.forms import CategoryForm, UserForm, PetForm, PictureForm, CommentForm
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views import View
@@ -202,12 +202,28 @@ def view_picture(request, id):
     if picture.likes.filter(id=request.user.id).exists():
         liked = True
 
+    if request.method == 'POST':
+        form = CommentForm(request.POST or None)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.creator = request.user
+            comment.picture = picture
+            comment.comment = request.POST.get('comment')
+            comment.save()
+            return HttpResponseRedirect(reverse('PetPhotos:view_picture', args=[str(id)]))
+    else:
+        comment_form = CommentForm()
+
+    comments = Comment.objects.filter(picture=picture).order_by('-id')
+    context_dict['comment_form'] = comment_form
     context_dict['picture'] = picture
     context_dict['likes'] = picture.number_of_likes()
     context_dict['liked'] = liked
+    context_dict['comments'] = comments
     return render(request, 'PetPhotos/view_picture.html', context=context_dict)
 
 
+@login_required
 def like_view(request, id):
     picture = get_object_or_404(Picture, id=request.POST.get('post_id'))
     liked = False
@@ -217,7 +233,9 @@ def like_view(request, id):
     else:
         picture.likes.add(request.user)
         liked = True
-    return HttpResponseRedirect(reverse('PetPhotos:view_picture', args=str(id)))
+
+    return HttpResponseRedirect(reverse('PetPhotos:view_picture', args=[str(id)]))
+
 
 def trending(request):
     most_liked = Picture.objects.order_by('-rating')[:3]
