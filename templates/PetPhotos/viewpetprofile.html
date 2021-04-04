@@ -16,7 +16,7 @@
 
             <h1>{{pet.name}}</h1> <!--Pet name at head of the page-->
             {% if pet.owner %}
-                <h2>Owned by {{pet.owner.name}}</h2> <!--Display owner's name-->
+                <h2>Owned by {{pet.owner.username}}</h2> <!--Display owner's name-->
             {% endif %}
 
             <div style="margin: auto;">
@@ -24,7 +24,7 @@
             </div>
 
         {% else %}
-        <h1>We couldn't find that pet</h1>
+            <h1>We couldn't find that pet</h1>
         {% endif %}
 
     {% endblock %}

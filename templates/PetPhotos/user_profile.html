@@ -1,0 +1,29 @@
+{% extends 'PetPhotos/base.html' %}
+{% load static %}
+
+{% block title_block %}
+    {% if user %}
+        {{ user.username }}
+    {% else %}
+        Unknown User
+    {% endif %}
+{% endblock %}
+
+{% block body_block %}
+    <p>Username: {{ user.username }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Pets:</p>
+    {% if pets %}
+         {% for p in pets %}
+                <li>
+                    <strong>
+                        <a href="{% url 'PetPhotos:viewpetprofile' p.slug %}">{{ p.name }}</a>
+                    </strong>
+                </li>
+        {% endfor %}
+    {% else %}
+        This user has no pets.
+    {% endif %}
+{% endblock %}
+
+

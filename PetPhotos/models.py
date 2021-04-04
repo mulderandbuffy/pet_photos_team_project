@@ -22,11 +22,6 @@ class UserProfile(models.Model):
     username = models.CharField(max_length=20, unique=True, blank=False)
     email = models.CharField(max_length=50, unique=True, blank=False)
     picture = models.ImageField(upload_to='images', blank=True)
-    slug = models.SlugField(unique=True, default='')
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.username)
-        super(UserProfile, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.user.username
@@ -36,7 +31,6 @@ class Category(models.Model):
     name = models.CharField(max_length=128, unique=True)
     creation_date = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(unique=True, default='')
-
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)

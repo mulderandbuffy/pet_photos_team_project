@@ -2,13 +2,11 @@ from django.contrib import admin
 from PetPhotos.models import Pet, UserProfile, Category, Picture, Comment
 
 
-
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('username', 'email', 'slug')
+    list_display = ('username', 'email')
 
 
 admin.site.register(UserProfile, UserProfileAdmin)
-
 
 
 class PetAdmin(admin.ModelAdmin):
@@ -37,5 +35,3 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Comment, CommentAdmin)
-
-
