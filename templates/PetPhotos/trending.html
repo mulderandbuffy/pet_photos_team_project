@@ -26,13 +26,20 @@
             {% for p in newpics %}
             <img src="{{ p.picture.url }}" alt="img" style = "max-width: 500px; max-height: auto;">
             {% endfor %}
-        {% else %}
+            {% else %}
             <strong>Nothing to See here...</strong>
-        {% endif %}
+            {% endif %}
     </div>
     <br>
     <div><!--New Categories-->
         <h4>New Categories</h4>
+        {% if cats %}
+            {% for c in cats %}
+                <a href="{% url 'PetPhotos:show_category' c.slug %}">{{ c.name }}</a> |
+            {% endfor %}
+        {% else %}
+            <strong>Nothing to See here...</strong>
+        {% endif %}
     </div>
     {% endblock %}
 </html>
