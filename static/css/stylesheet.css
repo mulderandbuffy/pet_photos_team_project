@@ -36,7 +36,7 @@ img.homeimg{
 img.smallimg {
     max-width: auto;
     max-height: 300px;
-    margin: 20px;
+    margin: 10px;
     opacity: 0.8;
 }
 img.smallimg:hover {
@@ -45,6 +45,7 @@ img.smallimg:hover {
     animation-iteration-count: 1;
     animation-timing-function: linear;
 }
+
 
 @keyframes shadowPulse {
     0% {
@@ -60,3 +61,8 @@ img.smallimg:hover {
     }
 }
 
+img.nolink{
+    max-width: 700px;
+    max-height: auto;
+    margin: 10px;
+}
