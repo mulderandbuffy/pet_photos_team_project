@@ -18,7 +18,7 @@
         {% if pictures %}
             {% for picture in pictures %}
             <div>
-                <a href="{% url 'PetPhotos:view_picture' picture.id %}"><img src="{{ picture.picture.url }}" alt="img" class="smallimg"></a>
+                <a href="{% url 'PetPhotos:view_picture' picture.id %}"><img src="{{ picture.picture.url }}" alt="img" class="smallimg" onmouseenter="hoverer(this)" onmouseleave="dehoverer(this)"></a>
             </div>
             {% endfor %}
         {% else %}
