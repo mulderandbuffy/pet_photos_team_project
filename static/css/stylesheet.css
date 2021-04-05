@@ -25,12 +25,14 @@ img.homeimg{
 
 .d-flex{
     display: flex;
-    float: right
+    float: right;
+    margin-bottom: auto;
 }
 
 .nav-item{
     padding-left:10px;
     padding-right:10px;
+    padding-bottom: 0px;
 }
 
 img.smallimg {
