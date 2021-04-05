@@ -1,0 +1,18 @@
+{% extends 'PetPhotos/base.html' %}
+{% load static %}
+
+{% block body_block %}
+        <h1>You searched for:</h1>
+        <br>
+        <div>
+            {% if searched %}
+                <h2>You searched for {{ searched }}</h2>
+
+                {% for cat in categories_sug %}
+                    <a href="{% url 'PetPhotos:show_category' cat.slug %}">{{ cat.name }}</a><br>
+                {% endfor %}
+            {% endif %}
+        </div>
+{% endblock %}
+
+

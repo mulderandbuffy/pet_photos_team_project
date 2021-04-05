@@ -1,6 +1,5 @@
-import self
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from PetPhotos.models import Category, Picture, Pet, Comment
 from PetPhotos.forms import CategoryForm, UserForm, PetForm, PictureForm, CommentForm
 from django.utils.decorators import method_decorator
@@ -13,12 +12,16 @@ from django.contrib.auth.models import User
 
 
 def index(request):
-    response = render(request, 'PetPhotos/index.html')
-    return response
+    context_dict = {}
+    results = Category.objects.all()
+    context_dict['results'] = results
+    return render(request, 'PetPhotos/index.html', context=context_dict)
 
 
 def show_category(request, category_name_slug):
     context_dict = {}
+    results = Category.objects.all()
+    context_dict['results'] = results
     try:
         category = Category.objects.get(slug=category_name_slug)
         pictures = Picture.objects.filter(category=category)
@@ -33,6 +36,8 @@ def show_category(request, category_name_slug):
 
 def categories(request):
     context_dict = {}
+    results = Category.objects.all()
+    context_dict['results'] = results
     show_categories = Category.objects.all()
     context_dict['categories'] = show_categories
 
@@ -41,6 +46,8 @@ def categories(request):
 
 def user_profiles(request):
     context_dict = {}
+    results = Category.objects.all()
+    context_dict['results'] = results
     profiles = User.objects.order_by('username')
     context_dict['profiles'] = profiles
 
@@ -49,6 +56,8 @@ def user_profiles(request):
 
 def user_profile(request, username):
     context_dict = {}
+    results = Category.objects.all()
+    context_dict['results'] = results
     user = User.objects.get(username=username)
     pets = Pet.objects.filter(owner=User.objects.get(username=user.username))
     context_dict['user'] = user
@@ -56,15 +65,21 @@ def user_profile(request, username):
     return render(request, 'PetPhotos/user_profile.html', context=context_dict)
 
 
-def viewpetprofile(request, pet_slug):
+def view_pet_profile(request, pet_slug):
     context_dict = {}
+    results = Category.objects.all()
+    context_dict['results'] = results
     pet = Pet.objects.get(slug=pet_slug)
     context_dict['pet'] = pet
-    return render(request, 'PetPhotos/viewpetprofile.html', context=context_dict)
+    return render(request, 'PetPhotos/view_pet_profile.html', context=context_dict)
 
 
 @login_required
 def add_category(request):
+    context_dict = {}
+    results = Category.objects.all()
+    context_dict['results'] = results
+
     form = CategoryForm()
 
     if request.method == 'POST':
@@ -77,7 +92,9 @@ def add_category(request):
         else:
             print(form.errors)
 
-    return render(request, 'PetPhotos/add_category.html', {'form': form})
+    context_dict['form'] = form
+
+    return render(request, 'PetPhotos/add_category.html', context=context_dict)
 
 
 @login_required
@@ -99,6 +116,10 @@ class LikePictureView(View):
 
 
 def register(request):
+    context_dict = {}
+    results = Category.objects.all()
+    context_dict['results'] = results
+
     registered = False
 
     if request.method == 'POST':
@@ -118,10 +139,17 @@ def register(request):
     else:
         user_form = UserForm()
 
-    return render(request, 'PetPhotos/register.html', context={'user_form': user_form, 'registered': registered})
+    context_dict['user_form'] = user_form
+    context_dict['registered'] = registered
+
+    return render(request, 'PetPhotos/register.html', context=context_dict)
 
 
 def user_login(request):
+    context_dict = {}
+    results = Category.objects.all()
+    context_dict['results'] = results
+
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -138,11 +166,15 @@ def user_login(request):
             print("Invalid username or password. Please check the details again!")
             return HttpResponse("Invalid details entered.")
     else:
-        return render(request, 'PetPhotos/login.html')
+        return render(request, 'PetPhotos/login.html', context=context_dict)
 
 
 @login_required
 def add_pet(request):
+    context_dict = {}
+    results = Category.objects.all()
+    context_dict['results'] = results
+
     form = PetForm()
 
     if request.method == 'POST':
@@ -162,11 +194,16 @@ def add_pet(request):
         else:
             print(form.errors)
 
-    return render(request, 'PetPhotos/add_pet.html', {'form': form})
+    context_dict['form'] = form
+    return render(request, 'PetPhotos/add_pet.html', context=context_dict)
 
 
 @login_required
 def add_picture(request):
+    context_dict = {}
+    results = Category.objects.all()
+    context_dict['results'] = results
+
     form = PictureForm()
 
     if request.method == 'POST':
@@ -187,7 +224,8 @@ def add_picture(request):
         else:
             print(form.errors)
 
-    return render(request, 'PetPhotos/add_picture.html', {'form': form})
+    context_dict['form'] = form
+    return render(request, 'PetPhotos/add_picture.html', context=context_dict)
 
 
 @login_required
@@ -197,6 +235,9 @@ def user_logout(request):
 
 
 def view_picture(request, id):
+    context_dict = {}
+    results = Category.objects.all()
+    context_dict['results'] = results
     context_dict = {}
     picture = Picture.objects.get(id=id)
 
@@ -237,3 +278,16 @@ def like_view(request, id):
         liked = True
     return HttpResponseRedirect(reverse('PetPhotos:view_picture', args=[str(id)]))
 
+
+def search_category(request):
+    context_dict = {}
+    results = Category.objects.all()
+    context_dict['results'] = results
+    if request.method == "POST":
+        searched = request.POST.get('searched')
+        categories_sug = Category.objects.filter(name__contains=searched)
+        context_dict['searched'] = searched
+        context_dict['categories_sug'] = categories_sug
+        return render(request, 'PetPhotos/search_category.html', context=context_dict)
+    else:
+        return render(request, 'PetPhotos/search_category.html', context=context_dict)

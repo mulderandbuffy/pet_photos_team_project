@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load pp_template_tags %}
 
     <!--BOOTSTRAP-->
 <html lang="en">
@@ -21,16 +22,6 @@
 
         <!-- Custom styles for this template -->
         <link href="https://getbootstrap.com/docs/4.2/examples/dashboard/dashboard.css" rel="stylesheet">
-
-        <style>
-            footer {
-                padding-top: 10px;
-                padding-bottom: 10px;
-                position:fixed;
-                bottom:10;
-                width:70%;
-            }
-        </style>
 
     </head>
     
@@ -55,26 +46,41 @@
                             <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:login' %}">Log In</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:register' %}">Register</a></li>
                         {% endif %}
-
+                        <form class="d-flex" method=POST action="{% url 'PetPhotos:search_category' %}">
+                        {% csrf_token %}
+                        <input class="form-control me-2" id="tags" type="search" list="categorylist" placeholder="Search Categories" name="searched">
+                        <datalist id="categorylist">
+                            {% for res in results %}
+                                <option value="{{ res.name }}"></option>
+                            {% endfor %}
+                        </datalist>
+                        <button class="btn btn-outline-success" type="submit">Search</button></form>
                     </ul>
                 </div>
             </nav>
         </header>
         
         <div class="container-fluid">
-            <!-- SIDEBAR, CAN ADD IN LATER-->
-                
-                <main role="main" class="col-md-9  ml-sm-auto col-lg-10 px-4">		
+            <div class="row">
+                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                    <div class="sidebar-sticky">
+                    {% block sidebar_block %}
+                    {% endblock %}
+                    </div>
+                </nav>
+
+                <main role="main" class="col-md-9  ml-sm-auto col-lg-10 px-4">
                     {% block body_block %}{% endblock %}
-                    
+
                     <!-- FOOTER -->
                     <footer>
+                        <hr>
                         <p class="float-right"><a href="#">Back to top</a></p>
-                        <p>&copy; 2021 WAD2 Team 5F &middot; <!--<a href="#">Privacy</a> &middot; <a href="#">Terms</a>--></p>
+                        <p>&copy; 2021 WAD2 Team 5F &middot;</p>
                     </footer>
                 </main>
             </div>
-
+        </div>
 
         <!-- Bootstrap core JavaScript -->
         <!-- Placed at the end of the document so the pages load faster -->
@@ -88,6 +94,7 @@
         <script type='text/javascript' src="{% static ' js/jquery-3.3.1.min.js' %} " crossorigin="anonymous"></script>
 		<script type='text/javascript' src="{% static ' js/petphotos-jquery.js' %} " crossorigin="anonymous"></script>
 		<script type='text/javascript' src="{% static ' js/petphotos-ajax.js' %} " crossorigin="anonymous"></script>
+
 
     </body>
 

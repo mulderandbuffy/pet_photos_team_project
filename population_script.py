@@ -118,6 +118,23 @@ def populate():
         add_com(comment=item['comment'], creator=item['creator'], picture=item['picture'],
                 creation_date=item['creation_date'])
 
+    # LIKES
+
+    set1 = [User.objects.get(username='user4'), User.objects.get(username='user1'), User.objects.get(username='user2')]
+    set2 = [User.objects.get(username='user2'), User.objects.get(username='user1')]
+    set3 = [User.objects.get(username='user6'), User.objects.get(username='user5'), User.objects.get(username='user2')]
+
+    for pic in Picture.objects.all():
+        if pic.id == 3 or pic.id == 2:
+            for user in set1:
+                pic.likes.add(user)
+        elif pic.id == 1 or pic.id == 7:
+            for user in set2:
+                pic.likes.add(user)
+        elif pic.id == 5:
+            for user in set3:
+                pic.likes.add(user)
+
 
 def add_pet(name, owner, picture):
     p = Pet.objects.get_or_create(name=name, owner=owner)[0]
