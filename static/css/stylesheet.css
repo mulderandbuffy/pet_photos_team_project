@@ -1,3 +1,4 @@
+
 img.bigimg{
     max-width: 1000px;
     max-height: auto;
@@ -5,7 +6,7 @@ img.bigimg{
 
 img.view_pic{
     max-width: auto;
-    max-height: 400px;
+  max-height: 400px;
 }
 
 img.logo{
@@ -58,5 +59,4 @@ img.smallimg:hover {
         transform: scale(1.0);
     }
 }
-
 

@@ -8,7 +8,7 @@ from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.models import User
-
+from django.db.models import Max
 
 def index(request):
     context_dict = {}
@@ -232,7 +232,7 @@ def add_picture(request):
 def user_logout(request):
     logout(request)
     return redirect(reverse('PetPhotos:index'))
-
+  
 
 def view_picture(request, id):
     context_dict = {}
@@ -275,6 +275,7 @@ def like_view(request, id):
     else:
         picture.likes.add(request.user)
         liked = True
+
     return HttpResponseRedirect(reverse('PetPhotos:view_picture', args=[str(id)]))
 
 
@@ -296,10 +297,9 @@ def trending(request):
     context_dict = {}
     results = Category.objects.all()
     context_dict['results'] = results
-    most_liked = Picture.objects.order_by('-likes')[:5]
-    new_pictures = Picture.objects.order_by('-creation_date')[:5]
+    most_liked = Picture.objects.annotate(max_likes=Max('likes')).order_by('-max_likes')[:3]
+    new_pictures = Picture.objects.order_by('-creation_date')[:3]
     new_categories = Category.objects.order_by('-creation_date')[:5]
-
     context_dict['liked'] = most_liked
     context_dict['newpics'] = new_pictures
     context_dict['cats'] = new_categories

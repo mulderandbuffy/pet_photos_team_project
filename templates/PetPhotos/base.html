@@ -37,6 +37,7 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+
                         <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:categories' %}">Categories</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:user_profiles' %}">Profiles</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:trending' %}">Trending</a></li>
@@ -63,17 +64,19 @@
                 </div>
             </nav>
         </header>
+       
         
         <div class="container-fluid">
             <div class="row">
                 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
                     <div class="sidebar-sticky">
                     {% block sidebar_block %}
+                        {% get_category_list category %}
                     {% endblock %}
                     </div>
                 </nav>
-
-                <main role="main" class="col-md-9  ml-sm-auto col-lg-10 px-4">
+                
+                <main role="main" class="col-md-9  ml-sm-auto col-lg-10 px-4">		
                     {% block body_block %}{% endblock %}
 
                     <!-- FOOTER -->
@@ -95,5 +98,4 @@
         <script src="https://getbootstrap.com/docs/4.2/examples/dashboard/dashboard.js"></script>
 
     </body>
-
 </html>
