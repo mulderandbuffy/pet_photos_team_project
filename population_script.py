@@ -39,7 +39,7 @@ def populate():
     ]
 
     user4_animals = [
-        {'name': 'Billy', 'owner': User.objects.get(username='user4'), 'picture': 'dog2.jpg'},
+        {'name': 'Molly', 'owner': User.objects.get(username='user4'), 'picture': 'molly.jpg'},
         {'name': 'Lilly', 'owner': User.objects.get(username='user4'), 'picture': 'rabbit1.png'},
         {'name': 'Minnie', 'owner': User.objects.get(username='user4'),  'picture': 'ant.jpg'}
     ]
