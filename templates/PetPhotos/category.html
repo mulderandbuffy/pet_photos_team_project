@@ -1,6 +1,5 @@
 {% extends 'PetPhotos/base.html' %}
 {% load static %}
-{% load pp_template_tags %}
 
 {% block title_block %}
     {% if category %}
@@ -10,10 +9,6 @@
     {% endif %}
 {% endblock %}
 
-{% block sidebar_block %}
-    {% get_category_list category %}
-{% endblock %}
-
 {% block body_block %}
     {% if category %}
         <h1>{{ category.name }}</h1>
@@ -21,9 +16,10 @@
         <div>
         </div>
         {% if pictures %}
+        <!--List all photos in the specified category-->
             {% for picture in pictures %}
             <div>
-                <a href="{% url 'PetPhotos:view_picture' picture.id %}"><img src="{{ picture.picture.url }}" alt="img"></a>
+                <a href="{% url 'PetPhotos:view_picture' picture.id %}"><img src="{{ picture.picture.url }}" alt="img" class="smallimg" onmouseenter="borderer(this)" onmouseleave="deborderer(this)"></a>
             </div>
             {% endfor %}
         {% else %}
