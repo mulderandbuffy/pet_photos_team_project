@@ -1,12 +1,13 @@
+
+<!-- Sidebar list of categories -->
+
 <!DOCTYPE html>
 
 <ul>
     {% if categories %}
         {% for c in categories %}
             {% if c == current_category %}
-            <li>
-                <strong><a href="{% url 'PetPhotos:show_category' c.slug %}">{{c.name}}</a></strong>
-            </li>
+                <li><strong><a href="{% url 'PetPhotos:show_category' c.slug %}">{{c.name}}</a></strong></li>
             {% else %}
                 <li><a href="{% url 'PetPhotos:show_category' c.slug %}">{{c.name}}</a></li>
             {% endif %}

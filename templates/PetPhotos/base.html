@@ -2,7 +2,7 @@
 {% load static %}
 {% load pp_template_tags %}
 
-    <!--BOOTSTRAP-->
+<!-- BOOTSTRAP -->
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -34,6 +34,9 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
+                <!-- MENU -->
+
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
@@ -49,6 +52,11 @@
                             <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:login' %}">Log In</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:register' %}">Register</a></li>
                         {% endif %}
+                    </ul>
+
+                    <!-- SEARCH BAR -->
+
+                    <div class="float-xl-right">
                         <form class="d-flex" id="d-flex" method=POST action="{% url 'PetPhotos:search_category' %}">
                             {% csrf_token %}
                             <input class="form-control me-2" id="tags" type="search" list="categorylist" placeholder="Search Categories" name="searched">
@@ -57,18 +65,20 @@
                                     <option value="{{ res.name }}"></option>
                                 {% endfor %}
                             </datalist>
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </ul>
+                            <button class="btn btn-outline-success" id="search_b" type="submit">Search</button>
+                        </form></div>
                 </div>
             </nav>
         </header>
-        
+
+        <!--SIDEBAR-->
+
         <div class="container-fluid">
             <div class="row">
                 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
                     <div class="sidebar-sticky">
                     {% block sidebar_block %}
+                        {% get_category_list category %}
                     {% endblock %}
                     </div>
                 </nav>
@@ -95,5 +105,4 @@
         <script src="https://getbootstrap.com/docs/4.2/examples/dashboard/dashboard.js"></script>
 
     </body>
-
 </html>

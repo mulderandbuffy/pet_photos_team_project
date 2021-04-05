@@ -5,7 +5,7 @@ img.bigimg{
 
 img.view_pic{
     max-width: auto;
-    max-height: 400px;
+  max-height: 400px;
 }
 
 img.logo{
@@ -24,7 +24,8 @@ img.homeimg{
 
 .d-flex{
     display: flex;
-    float: right
+    float: right;
+    margin-bottom: auto;
 }
 
 .nav-item{
@@ -35,9 +36,10 @@ img.homeimg{
 img.smallimg {
     max-width: auto;
     max-height: 300px;
-    margin: 20px;
+    margin: 10px;
     opacity: 0.8;
 }
+
 img.smallimg:hover {
     animation-name: shadowPulse;
     animation-duration: 1.5s;
@@ -59,4 +61,18 @@ img.smallimg:hover {
     }
 }
 
+img.nolink{
+    max-width: 700px;
+    max-height: auto;
+    margin: 10px;
+}
 
+#tags{
+    padding-top:2px;
+    padding-bottom:2px;
+    border-radius: 5px;
+}
+
+#search_b{
+    border-radius: 5px;
+}

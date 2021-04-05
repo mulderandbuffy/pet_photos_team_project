@@ -1,18 +1,25 @@
+
+<!-- When a user searches something in the search bar, this is the resulting page with the list of results -->
+
 {% extends 'PetPhotos/base.html' %}
 {% load static %}
 
-{% block body_block %}
-        <h1>You searched for:</h1>
-        <br>
-        <div>
-            {% if searched %}
-                <h2>You searched for {{ searched }}</h2>
+{% block title_block %}
+    Search
+{% endblock %}
 
-                {% for cat in categories_sug %}
-                    <a href="{% url 'PetPhotos:show_category' cat.slug %}">{{ cat.name }}</a><br>
-                {% endfor %}
-            {% endif %}
-        </div>
+{% block body_block %}
+    <h1>You searched for:</h1>
+    <div>
+        {% if searched %}
+            <h2>You searched for {{ searched }}</h2>
+
+            {% for cat in categories_sug %}
+                <a href="{% url 'PetPhotos:show_category' cat.slug %}">{{ cat.name }}</a><br>
+            {% endfor %}
+
+        {% endif %}
+    </div>
 {% endblock %}
 
 
