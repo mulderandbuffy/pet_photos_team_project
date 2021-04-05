@@ -18,7 +18,7 @@
         {% if pets %}
              {% for p in pets %}
                     <li>
-                        <a href="{% url 'PetPhotos:viewpetprofile' p.slug %}">{{ p.name }}</a>
+                        <a href="{% url 'PetPhotos:view_pet_profile' p.slug %}">{{ p.name }}</a>
                     </li>
             {% endfor %}
         {% else %}

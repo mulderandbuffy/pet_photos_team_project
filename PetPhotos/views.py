@@ -1,12 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from PetPhotos.models import Category, Picture, Pet, Comment
 from PetPhotos.forms import CategoryForm, UserForm, PetForm, PictureForm, CommentForm
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from django.contrib.auth import authenticate, login
-from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.models import User
 
@@ -15,6 +14,7 @@ def index(request):
     context_dict = {}
     results = Category.objects.all()
     context_dict['results'] = results
+
     return render(request, 'PetPhotos/index.html', context=context_dict)
 
 
@@ -238,7 +238,6 @@ def view_picture(request, id):
     context_dict = {}
     results = Category.objects.all()
     context_dict['results'] = results
-    context_dict = {}
     picture = Picture.objects.get(id=id)
 
     liked = False
@@ -291,3 +290,18 @@ def search_category(request):
         return render(request, 'PetPhotos/search_category.html', context=context_dict)
     else:
         return render(request, 'PetPhotos/search_category.html', context=context_dict)
+
+
+def trending(request):
+    context_dict = {}
+    results = Category.objects.all()
+    context_dict['results'] = results
+    most_liked = Picture.objects.order_by('-likes')[:5]
+    new_pictures = Picture.objects.order_by('-creation_date')[:5]
+    new_categories = Category.objects.order_by('-creation_date')[:5]
+
+    context_dict['liked'] = most_liked
+    context_dict['newpics'] = new_pictures
+    context_dict['cats'] = new_categories
+
+    return render(request, 'PetPhotos/trending.html', context=context_dict)

@@ -16,8 +16,8 @@ urlpatterns = [
     path('view_picture/<slug:id>/', views.view_picture, name='view_picture'),
     path('search_category/', views.search_category, name='search_category'),
     path('like/<slug:id>/', views.like_view, name='like_post'),
-    # path('like_picture/', views.LikePictureView.as_view(), name='like_picture'),
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),
+    path('trending/', views.trending, name='trending')
 ]

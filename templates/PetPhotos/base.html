@@ -11,6 +11,7 @@
         <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
         <meta name="generator" content="Jekyll v3.8.5">
         <link rel="icon" href="{% static 'images/favicon.ico' %}">
+        <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
         <title>
             PetPhotos - {% block title_block %}
             A Place to Share Pets!
@@ -26,6 +27,7 @@
     </head>
     
     <body>
+        <script src="{% static 'js/hovereffects.js' %}"></script>
         <header>
             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark p-0">
                 <a class="navbar-brand p-2" href="{% url 'index' %}">PetPhotos</a>
@@ -37,6 +39,7 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:categories' %}">Categories</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:user_profiles' %}">Profiles</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:trending' %}">Trending</a></li>
                         {% if user.is_authenticated %}
                             <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:add_category' %}">Add Category</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:add_pet' %}">Add Pet</a></li>
@@ -46,15 +49,16 @@
                             <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:login' %}">Log In</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:register' %}">Register</a></li>
                         {% endif %}
-                        <form class="d-flex" method=POST action="{% url 'PetPhotos:search_category' %}">
-                        {% csrf_token %}
-                        <input class="form-control me-2" id="tags" type="search" list="categorylist" placeholder="Search Categories" name="searched">
-                        <datalist id="categorylist">
-                            {% for res in results %}
-                                <option value="{{ res.name }}"></option>
-                            {% endfor %}
-                        </datalist>
-                        <button class="btn btn-outline-success" type="submit">Search</button></form>
+                        <form class="d-flex" id="d-flex" method=POST action="{% url 'PetPhotos:search_category' %}">
+                            {% csrf_token %}
+                            <input class="form-control me-2" id="tags" type="search" list="categorylist" placeholder="Search Categories" name="searched">
+                            <datalist id="categorylist">
+                                {% for res in results %}
+                                    <option value="{{ res.name }}"></option>
+                                {% endfor %}
+                            </datalist>
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
                     </ul>
                 </div>
             </nav>
@@ -85,16 +89,10 @@
         <!-- Bootstrap core JavaScript -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script>window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.2/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+        <script src="https://getbootstrap.com/docs/4.2/assets/js/vendor/jquery-slim.min.js"></script>
         <script src="https://getbootstrap.com/docs/4.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
         <script src="https://getbootstrap.com/docs/4.2/examples/dashboard/dashboard.js"></script>
-
-        <!--JQuery Script added by Connor 03/04/21-->
-        <script type='text/javascript' src="{% static ' js/jquery-3.3.1.min.js' %} " crossorigin="anonymous"></script>
-		<script type='text/javascript' src="{% static ' js/petphotos-jquery.js' %} " crossorigin="anonymous"></script>
-		<script type='text/javascript' src="{% static ' js/petphotos-ajax.js' %} " crossorigin="anonymous"></script>
-
 
     </body>
 

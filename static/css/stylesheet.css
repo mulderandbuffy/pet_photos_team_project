@@ -1,0 +1,62 @@
+img.bigimg{
+    max-width: 1000px;
+    max-height: auto;
+}
+
+img.view_pic{
+    max-width: auto;
+    max-height: 400px;
+}
+
+img.logo{
+    max-width: 300px;
+    max-height: auto;
+}
+
+img.homeimg{
+    max-width: 700px;
+    max-height: auto;
+}
+
+.centred{
+    text-align: center;
+}
+
+.d-flex{
+    display: flex;
+    float: right
+}
+
+.nav-item{
+    padding-left:10px;
+    padding-right:10px;
+}
+
+img.smallimg {
+    max-width: auto;
+    max-height: 300px;
+    margin: 20px;
+    opacity: 0.8;
+}
+img.smallimg:hover {
+    animation-name: shadowPulse;
+    animation-duration: 1.5s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+}
+
+@keyframes shadowPulse {
+    0% {
+        transform: scale(1.0);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1.0);
+    }
+}
+
+
