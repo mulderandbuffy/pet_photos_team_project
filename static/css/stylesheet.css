@@ -1,0 +1,23 @@
+img.smallimg {
+    max-width: 500px;
+    max-height: auto;
+}
+
+img.bigimg{
+    max-width: 1000px;
+    max-height: auto;
+}
+
+img.logo{
+    max-width: 300px;
+    max-height: auto;
+}
+
+img.homeimg{
+    max-width: 700px;
+    max-height: auto;
+}
+
+.centred{
+    text-align: center;
+}

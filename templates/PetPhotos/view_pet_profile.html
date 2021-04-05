@@ -17,11 +17,9 @@
             <p><b>Name:</b> {{ pet.name }}</p>
             <p><b>Owner:</b> {{ pet.owner }}</p>
 
-            <img src="{{ pet.picture.url }}" alt="img" style="max-width: 500px; max-height: auto;">
+            <div>
+            <img src="{{ pet.picture.url }}" alt="img" class="smallimg"></div>
 
-            <div style="margin: auto;">
-                <!--Add text here-->
-            </div>
 
         {% else %}
             <h1>This pet doesn't exist.</h1>

@@ -11,6 +11,7 @@
         <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
         <meta name="generator" content="Jekyll v3.8.5">
         <link rel="icon" href="{% static 'images/favicon.ico' %}">
+        <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
         <title>
             PetPhotos - {% block title_block %}
             A Place to Share Pets!
@@ -26,6 +27,7 @@
     </head>
     
     <body>
+        <script src="{% static 'js/hovereffects.js' %}"></script>
         <header>
             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark p-0">
                 <a class="navbar-brand p-2" href="{% url 'index' %}">PetPhotos</a>
