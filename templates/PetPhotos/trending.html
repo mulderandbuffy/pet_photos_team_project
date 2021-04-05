@@ -3,15 +3,6 @@
 {% load static %}
 
 <html>
-    <script>
-        function hoverer(img) {
-            img.style.border = "thick solid #0000FF";
-        }
-    
-        function dehoverer(img) {
-            img.style.border = "none";
-        }
-    </script>
 
     {% block title_block %}
         New and Trending
@@ -34,7 +25,7 @@
         <h4>New Pictures</h4>
             {% if newpics %}
             {% for p in newpics %}
-            <a href="{% url 'PetPhotos:view_picture' p.id %}"><img src="{{ p.picture.url }}" alt="img" class="smallimg"></a>
+            <a href="{% url 'PetPhotos:view_picture' p.id %}"><img src="{{ p.picture.url }}" alt="img" class="smallimg" onmouseenter="hoverer(this)" onmouseleave="dehoverer(this)"></a>
             {% endfor %}
             {% else %}
             <strong>Nothing to See here...</strong>

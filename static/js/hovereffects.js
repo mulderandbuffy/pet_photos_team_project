@@ -1,16 +1,5 @@
-
-const image = document.getElementById('image');
-
-image.addEventListener('mouseenter', e => {
-    hoverer(image);
-});
-
-image.addEventListener('mouseleave', e => {
-    dehoverer(image);
-})
-
 function hoverer(img) {
-    img.style.border = "thick solid #00000"
+    img.style.border = "thick solid black"
 }
 
 function dehoverer(img) {
