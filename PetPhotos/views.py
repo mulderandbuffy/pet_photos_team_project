@@ -8,6 +8,7 @@ from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.db.models import Max
 
 def index(request):
     context_dict = {}
@@ -292,7 +293,7 @@ def search_category(request):
         return render(request, 'PetPhotos/search_category.html', context=context_dict)
 
 def trending(request):
-    most_liked = Picture.objects.order_by('-likes')[:3]
+    most_liked = Picture.objects.annotate(max_likes=Max('likes')).order_by('-max_likes')[:3]
     new_pictures = Picture.objects.order_by('-creation_date')[:3]
     new_categories = Category.objects.order_by('-creation_date')[:5]
 
