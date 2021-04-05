@@ -1,29 +1,25 @@
+
+<!-- Page that displays an animal of a certain user -->
+
 {% extends 'PetPhotos/base.html' %}
 
-<html>
-    {% block title_block %}
-        {% if pet %}
-            {{pet.name}}
-        {% else %}
-            Unknown Pet
-        {% endif %}
-    {% endblock %}
+{% block title_block %}
+    {% if pet %}
+        {{pet.name}}
+    {% else %}
+        Unknown Pet
+    {% endif %}
+{% endblock %}
 
-    {% block body_block %}
-
-        {% if pet %}
-
-            <h1> Pet Profile</h1>
-            <p><b>Name:</b> {{ pet.name }}</p>
-            <p><b>Owner:</b> {{ pet.owner }}</p>
-
-            <div>
-            <img src="{{ pet.picture.url }}" alt="img" class="nolink"></div>
-
-
-        {% else %}
-            <h1>This pet doesn't exist.</h1>
-        {% endif %}
-
-    {% endblock %}
-</html>
+{% block body_block %}
+    {% if pet %}
+    <h1> Pet Profile</h1>
+    <div>
+        <p><b>Name:</b> {{ pet.name }}</p>
+        <p><b>Owner:</b> {{ pet.owner }}</p>
+        <img src="{{ pet.picture.url }}" alt="img" class="nolink">
+    </div>
+    {% else %}
+        This pet doesn't exist.
+    {% endif %}
+{% endblock %}

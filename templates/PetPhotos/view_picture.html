@@ -1,65 +1,72 @@
+
+<!-- Page that displays a particular picture -->
+
 {% extends 'PetPhotos/base.html' %}
 
-<html>
-    {% block title_block %}
-        {% if picture %}
-            Picture from category {{ picture.category }}
-        {% else %}
-            Unknown Picture
-        {% endif %}
-    {% endblock %}
+{% block title_block %}
+    {% if picture %}
+        Picture from category {{ picture.category }}
+    {% else %}
+        Unknown Picture
+    {% endif %}
+{% endblock %}
 
-    {% block body_block %}
+{% block body_block %}
 
-        {% if picture %}
+    {% if picture %}
 
-            <img src="{{ picture.picture.url }}" alt="img" class="view_pic">
-            <br>
-            {% if user.is_authenticated %}
-                <form action="{% url 'PetPhotos:like_post' picture.id %}" method="POST">
-                    {% csrf_token %}
+        <img src="{{ picture.picture.url }}" alt="img" class="view_pic">
 
-                    {% if liked %}
-                        <button type="submit" name="post_id" value="{{ picture.id }}" class="btn btn-danger">Unlike</button>
-                    {% else %}
-                        <button type="submit" name="post_id" value="{{ picture.id }}" class="btn btn-primary">Like</button>
-                    {% endif %}
+        <br>
 
+        <!-- Like Section -->
 
-                </form>
-            {% endif %}
-            <a>Number of Likes: {{ likes }}</a>
+        {% if user.is_authenticated %}
+            <form action="{% url 'PetPhotos:like_post' picture.id %}" method="POST">
+                {% csrf_token %}
 
-            <br>
-            <h2>Comments</h2>
-
-            <form method="post">
-                {% if user.is_authenticated %}
-                    {% csrf_token %}
-                    {{ comment_form.as_p }}
-                    <input type="submit" value="Submit" class="btn btn-outline-success">
+                {% if liked %}
+                    <button type="submit" name="post_id" value="{{ picture.id }}" class="btn btn-danger">Unlike</button>
+                {% else %}
+                    <button type="submit" name="post_id" value="{{ picture.id }}" class="btn btn-primary">Like</button>
                 {% endif %}
-            </form>
 
-            <br>
-            <br>
-            {% if comments %}
-                <hr>
-                {% for comment in comments %}
-                    <strong> {{ comment.creator }} - {{ comment.creation_date }} </strong>
-                    <br>
-                    {{ comment.comment }}
-                    <br>
-                    <hr>
-                {% endfor %}
-            {% else %}
-                 No comments yet...
-                <br>
-                <br>
-            {% endif %}
-        {% else %}
-            <h1>This picture doesn't exist.</h1>
+
+            </form>
         {% endif %}
 
-    {% endblock %}
-</html>
+        <a>Number of Likes: {{ likes }}</a>
+
+        <br>
+
+        <!-- Comment Section -->
+
+        <h2>Comments</h2>
+
+        <form method="post">
+            {% if user.is_authenticated %}
+                {% csrf_token %}
+                {{ comment_form.as_p }}
+                <input type="submit" value="Submit" class="btn btn-outline-success">
+            {% endif %}
+        </form>
+
+        <br>
+        <br>
+        {% if comments %}
+            <hr>
+            {% for comment in comments %}
+                <strong> {{ comment.creator }} - {{ comment.creation_date }} </strong>
+                <br>
+                {{ comment.comment }}
+                <br>
+                <hr>
+            {% endfor %}
+        {% else %}
+             No comments yet...
+        {% endif %}
+    {% else %}
+        This picture doesn't exist.
+    {% endif %}
+
+{% endblock %}

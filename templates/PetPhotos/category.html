@@ -1,3 +1,6 @@
+
+<!-- Page where is the category with all the related pictures displayed, alongside with sidebar of all categories -->
+
 {% extends 'PetPhotos/base.html' %}
 {% load static %}
 
@@ -12,21 +15,20 @@
 {% block body_block %}
     {% if category %}
         <h1>{{ category.name }}</h1>
-        <br>
         <div>
+            {% if pictures %}
+
+                {% for picture in pictures %}
+                    <a href="{% url 'PetPhotos:view_picture' picture.id %}"><img src="{{ picture.picture.url }}" alt="img" class="smallimg" onmouseenter="hoverer(this)" onmouseleave="dehoverer(this)"></a>
+                {% endfor %}
+
+            {% else %}
+                <strong>No pictures currently in category.</strong>
+            {% endif %}
         </div>
-        {% if pictures %}
-        <!--List all photos in the specified category-->
-            {% for picture in pictures %}
-            <div>
-                <a href="{% url 'PetPhotos:view_picture' picture.id %}"><img src="{{ picture.picture.url }}" alt="img" class="smallimg" onmouseenter="hoverer(this)" onmouseleave="dehoverer(this)"></a>
-            </div>
-            {% endfor %}
-        {% else %}
-            <strong>No pictures currently in category.</strong>
-        {% endif %}
+
     {% else %}
-        The specified category does not exist.
+        This category doesn't exist.
     {% endif %}
 {% endblock %}
 

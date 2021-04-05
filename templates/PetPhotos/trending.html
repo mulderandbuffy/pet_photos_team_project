@@ -1,37 +1,41 @@
-<!DOCTYPE html>
+
+<!-- Page which displays 5 most liked pictures, 5 most recent pictures, and 5 most recent categories -->
+
 {% extends 'PetPhotos/base.html' %}
 {% load static %}
 
-<html>
+{% block title_block %}
+    New and Trending
+{% endblock %}
 
-    {% block title_block %}
-        New and Trending
-    {% endblock %}
-
-    {% block body_block %}
+{% block body_block %}
     <h1>Trending</h1>
-    <div> <!--MOST LIKED IMAGES-->
+    <div> <!--Most Liked Images-->
         <h4>Most Liked Pictures</h4>
         {% if liked %}
             {% for l in liked %}
-            <a href="{% url 'PetPhotos:view_picture' l.id %}"><img src="{{ l.picture.url }}" alt="img" class="smallimg" onmouseenter="hoverer(this)" onmouseleave="dehoverer(this)"></a>
+                <a href="{% url 'PetPhotos:view_picture' l.id %}"><img src="{{ l.picture.url }}" alt="img" class="smallimg" onmouseenter="hoverer(this)" onmouseleave="dehoverer(this)"></a>
             {% endfor %}
         {% else %}
             <strong>Nothing to See here...</strong>
         {% endif %}
     </div>
+
     <br>
-    <div> <!--Newest images-->
-        <h4>New Pictures</h4>
-            {% if newpics %}
+
+    <div> <!--New Images-->
+    <h4>New Pictures</h4>
+        {% if newpics %}
             {% for p in newpics %}
-            <a href="{% url 'PetPhotos:view_picture' p.id %}"><img src="{{ p.picture.url }}" alt="img" class="smallimg" onmouseenter="hoverer(this)" onmouseleave="dehoverer(this)"></a>
+                <a href="{% url 'PetPhotos:view_picture' p.id %}"><img src="{{ p.picture.url }}" alt="img" class="smallimg" onmouseenter="hoverer(this)" onmouseleave="dehoverer(this)"></a>
             {% endfor %}
-            {% else %}
+        {% else %}
             <strong>Nothing to See here...</strong>
-            {% endif %}
+        {% endif %}
     </div>
+
     <br>
+
     <div><!--New Categories-->
         <h4>New Categories</h4>
         {% if cats %}
@@ -42,5 +46,4 @@
             <strong>Nothing to See here...</strong>
         {% endif %}
     </div>
-    {% endblock %}
-</html>
+{% endblock %}

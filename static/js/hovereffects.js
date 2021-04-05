@@ -1,3 +1,6 @@
+
+// Functions that highlight an image when hovered over. Called from individual elements.
+
 function hoverer(img) {
     img.style.opacity = "1"
 }

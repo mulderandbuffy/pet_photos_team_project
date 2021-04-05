@@ -1,3 +1,6 @@
+
+<!-- Profile Page of a particular user -->
+
 {% extends 'PetPhotos/base.html' %}
 {% load static %}
 
@@ -12,21 +15,22 @@
 {% block body_block %}
     {% if user %}
         <h1> User Profile</h1>
-        <p>Username: {{ user.username }}</p>
-        <p>Email: {{ user.email }}</p>
-        <p>Pets:</p>
-        {% if pets %}
-             {% for p in pets %}
-                    <li>
-                        <a href="{% url 'PetPhotos:view_pet_profile' p.slug %}">{{ p.name }}</a>
-                    </li>
-            {% endfor %}
-        {% else %}
-            This user has no pets.
-        {% endif %}
-   {% else %}
-        This user doesn't exist.
-   {% endif %}
-{% endblock %}
+        <div>
+            <p>Username: {{ user.username }}</p>
+            <p>Email: {{ user.email }}</p>
 
-<!--Lists the user's pets-->
+            <!--List the user's pets-->
+
+            <p>Pets:</p>
+            {% if pets %}
+                {% for p in pets %}
+                    <li><a href="{% url 'PetPhotos:view_pet_profile' p.slug %}">{{ p.name }}</a></li>
+                {% endfor %}
+            {% else %}
+                This user has no pets.
+            {% endif %}
+        </div>
+    {% else %}
+        This user doesn't exist.
+    {% endif %}
+{% endblock %}

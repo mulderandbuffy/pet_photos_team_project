@@ -1,3 +1,6 @@
+
+<!-- Page that displays a list of all current categories in alphabetical order -->
+
 {% extends 'PetPhotos/base.html' %}
 {% load static %}
 
@@ -7,18 +10,14 @@
 
 {% block body_block %}
     {% if categories %}
-         <h1 >Categories:</h1>
-         {% for c in categories %}
-                <li>
-                    <strong>
-                        <a href="{% url 'PetPhotos:show_category' c.slug %}">{{ c.name }}</a>
-                    </strong>
-                </li>
-        {% endfor %}
+        <h1 >Categories:</h1>
+        <div>
+            {% for c in categories %}
+                <li><strong><a href="{% url 'PetPhotos:show_category' c.slug %}">{{ c.name }}</a></strong></li>
+            {% endfor %}
+        </div>
     {% else %}
         No category exists.
     {% endif %}
 {% endblock %}
 
-
-<!--List of all current categories-->

@@ -2,6 +2,11 @@ from django.contrib import admin
 from PetPhotos.models import Pet, UserProfile, Category, Picture, Comment
 
 
+"""
+    registering Pet, UserProfile, Category, Picture, Comment to the admin interface
+"""
+
+
 admin.site.register(UserProfile)
 
 
