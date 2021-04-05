@@ -1,7 +1,7 @@
 function hoverer(img) {
-    img.style.border = "thick solid black"
+    img.style.opacity = "1"
 }
 
 function dehoverer(img) {
-    img.style.border = "none"
+    img.style.opacity = "0.8"
 }
