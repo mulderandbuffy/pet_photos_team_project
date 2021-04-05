@@ -14,7 +14,7 @@
         <h4>Most Liked Pictures</h4>
         {% if liked %}
             {% for l in liked %}
-            <a href="{% url 'PetPhotos:view_picture' l.id %}"><img src="{{ l.picture.url }}" alt="img" class="smallimg" onmouseenter="hoverer(this)" onmouseleave="dehoverer(this)"></a>
+            <a href="{% url 'PetPhotos:view_picture' l.id %}"><img src="{{ l.picture.url }}" alt="img" class="smallimg" onmouseenter="borderer(this)" onmouseleave="deborderer(this)"></a>
             {% endfor %}
         {% else %}
             <strong>Nothing to See here...</strong>
