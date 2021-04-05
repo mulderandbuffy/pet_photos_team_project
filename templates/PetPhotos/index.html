@@ -27,6 +27,7 @@
             <strong>Welcome back {{user.username}}</strong>
         {% else %}
             <strong>You're not logged in. <a href="{% url 'PetPhotos:login' %}">Log In</a> or <a href="{% url 'PetPhotos:register' %}">Register</a> <!--SIGN UP--></strong>
+
         {% endif %}
     </div>
 {% endblock %}

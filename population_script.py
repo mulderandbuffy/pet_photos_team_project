@@ -27,27 +27,27 @@ def populate():
     # PETS
 
     user1_animals = [
-        {'name': 'Jackie White', 'owner': User.objects.get(username='user1'), 'picture': 'sheep.jpg'},
-        {'name': 'Benny Blue', 'owner': User.objects.get(username='user1'), 'picture': 'dog3.jpg'},
-        {'name': 'Ally Red', 'owner': User.objects.get(username='user1'), 'picture': 'racoon.jpg'}
+        {'name': 'Thor', 'owner': User.objects.get(username='user1'), 'picture': 'thor.jpg'},
+        {'name': 'Buster', 'owner': User.objects.get(username='user1'), 'picture': 'dog4.jpg'},
+        {'name': 'Smudge', 'owner': User.objects.get(username='user1'), 'picture': 'cat5.jpg'}
     ]
 
     user2_animals = [
-        {'name': 'Bonnie', 'owner': User.objects.get(username='user2'), 'picture': 'mouse.png'},
-        {'name': 'Meow', 'owner': User.objects.get(username='user2'), 'picture': 'mouse2.jpg'},
-        {'name': 'Beck', 'owner': User.objects.get(username='user2'),  'picture': 'cat3.jpg'}
+        {'name': 'Bonnie', 'owner': User.objects.get(username='user2'), 'picture': 'horse.jpg'},
+        {'name': 'Meow', 'owner': User.objects.get(username='user2'), 'picture': 'cat4.jpg'},
+        {'name': 'Beck', 'owner': User.objects.get(username='user2'),  'picture': 'dog5.jpg'}
     ]
 
     user4_animals = [
-        {'name': 'Billy', 'owner': User.objects.get(username='user4'), 'picture': 'dog2.jpg'},
-        {'name': 'Lilly', 'owner': User.objects.get(username='user4'), 'picture': 'rabbit1.png'},
-        {'name': 'Minnie', 'owner': User.objects.get(username='user4'),  'picture': 'ant.jpg'}
+        {'name': 'Molly', 'owner': User.objects.get(username='user4'), 'picture': 'molly.jpg'},
+        {'name': 'Lilly', 'owner': User.objects.get(username='user4'), 'picture': 'larkin.jpg'},
+        {'name': 'Oreo', 'owner': User.objects.get(username='user4'),  'picture': 'oreo.jpg'}
     ]
 
     user5_animals = [
         {'name': 'Mickey', 'owner': User.objects.get(username='user5'), 'picture':'cat2.jpg'},
-        {'name': 'Buddy', 'owner': User.objects.get(username='user5'), 'picture': 'dog.jpg'},
-        {'name': 'Megatron', 'owner': User.objects.get(username='user5'),  'picture': 'birb1.jpg'}
+        {'name': 'Buddy', 'owner': User.objects.get(username='user5'), 'picture': 'blacklab.jpg'},
+        {'name': 'Megatron', 'owner': User.objects.get(username='user5'),  'picture': 'birbagain.jpg'}
     ]
     for item in user1_animals:
         add_pet(item["name"], item["owner"], item["picture"])
@@ -64,21 +64,21 @@ def populate():
     # PICTURES
 
     dog_pics = [
-        {'creator': User.objects.get(username='user2'), 'picture': 'dog.jpg', 'creation_date': timezone.now()},
+        {'creator': User.objects.get(username='user2'), 'picture': 'fluffydog.jpg', 'creation_date': timezone.now()},
         {'creator': User.objects.get(username='user1'), 'picture': 'dog2.jpg', 'creation_date': timezone.now()},
         {'creator': User.objects.get(username='user3'), 'picture': 'dog3.jpg', 'creation_date': timezone.now()}
     ]
 
     cat_pics = [
-        {'creator': User.objects.get(username='user2'), 'picture': 'bueno.jpg', 'creation_date': timezone.now()},
+        {'creator': User.objects.get(username='user2'), 'picture': 'void.jpg', 'creation_date': timezone.now()},
         {'creator': User.objects.get(username='user1'), 'picture': 'cat2.jpg', 'creation_date': timezone.now()},
         {'creator': User.objects.get(username='user3'), 'picture': 'cat3.jpg', 'creation_date': timezone.now()}
     ]
 
-    mouse_pics = [
-        {'creator': User.objects.get(username='user4'), 'picture': 'mouse2.jpg', 'creation_date': timezone.now()},
-        {'creator': User.objects.get(username='user5'), 'picture': 'mouse.png', 'creation_date': timezone.now()},
-        {'creator': User.objects.get(username='user6'), 'picture': 'mouse3.jpg', 'creation_date': timezone.now()}
+    bird_pics = [
+        {'creator': User.objects.get(username='user4'), 'picture': 'budgie.jpg', 'creation_date': timezone.now()},
+        {'creator': User.objects.get(username='user5'), 'picture': 'birb2.jpg', 'creation_date': timezone.now()},
+        {'creator': User.objects.get(username='user6'), 'picture': 'birbagain.jpg', 'creation_date': timezone.now()}
     ]
 
     # CATEGORIES
@@ -86,7 +86,7 @@ def populate():
     categories = {
         'cats': {'pics': cat_pics, 'creation_date': timezone.now()},
         'dogs': {'pics': dog_pics, 'creation_date': timezone.now()},
-        'mice': {'pics': mouse_pics, 'creation_date': timezone.now()}
+        'birds': {'pics': bird_pics, 'creation_date': timezone.now()}
     }
 
     for cat, cat_data in categories.items():

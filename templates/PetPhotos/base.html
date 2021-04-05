@@ -40,6 +40,7 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+
                         <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:categories' %}">Categories</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:user_profiles' %}">Profiles</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'PetPhotos:trending' %}">Trending</a></li>
@@ -54,9 +55,11 @@
                         {% endif %}
                     </ul>
 
+
                     <!-- SEARCH BAR -->
 
                     <div class="float-xl-right">
+
                         <form class="d-flex" id="d-flex" method=POST action="{% url 'PetPhotos:search_category' %}">
                             {% csrf_token %}
                             <input class="form-control me-2" id="tags" type="search" list="categorylist" placeholder="Search Categories" name="searched">
@@ -65,11 +68,14 @@
                                     <option value="{{ res.name }}"></option>
                                 {% endfor %}
                             </datalist>
+
                             <button class="btn btn-outline-success" id="search_b" type="submit">Search</button>
+
                         </form></div>
                 </div>
             </nav>
         </header>
+
 
         <!--SIDEBAR-->
 
@@ -105,4 +111,6 @@
         <script src="https://getbootstrap.com/docs/4.2/examples/dashboard/dashboard.js"></script>
 
     </body>
+
 </html>
+

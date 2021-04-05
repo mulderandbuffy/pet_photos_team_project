@@ -1,3 +1,4 @@
+
 img.bigimg{
     max-width: 1000px;
     max-height: auto;
@@ -31,6 +32,7 @@ img.homeimg{
 .nav-item{
     padding-left:10px;
     padding-right:10px;
+    padding-bottom: 0px;
 }
 
 img.smallimg {
@@ -46,6 +48,7 @@ img.smallimg:hover {
     animation-iteration-count: 1;
     animation-timing-function: linear;
 }
+
 
 @keyframes shadowPulse {
     0% {

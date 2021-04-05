@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.models import User
-
+from django.db.models import Max
 
 """
     index view displays the "Home Page"
@@ -255,7 +255,7 @@ def add_picture(request):
 def user_logout(request):
     logout(request)
     return redirect(reverse('PetPhotos:index'))
-
+  
 
 """
     view_picture view is a page where you can see a particular animal from a particular category, its comments, like 
@@ -347,14 +347,15 @@ def search_category(request):
 
 
 """
-    trending view displays 5 most liked pictures, 5 most recent pictures, and 5 most recent categories
+    trending view displays 6 most liked pictures, 6 most recent pictures, and 5 most recent categories
 """
 
 
 def trending(request):
+
     context_dict = {'results': Category.objects.all(),
-                    'liked': Picture.objects.order_by('-likes')[:5],
-                    'newpics': Picture.objects.order_by('-creation_date')[:5],
+                    'liked': Picture.objects.annotate(max_likes=Max('likes')).order_by('-max_likes')[:6],
+                    'newpics': Picture.objects.order_by('-creation_date')[:6],
                     'cats': Category.objects.order_by('-creation_date')[:5]}
 
     return render(request, 'PetPhotos/trending.html', context=context_dict)
