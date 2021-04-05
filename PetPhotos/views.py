@@ -238,7 +238,7 @@ def like_view(request, id):
 
 
 def trending(request):
-    most_liked = Picture.objects.order_by('-rating')[:3]
+    most_liked = Picture.objects.order_by('-likes')[:3]
     new_pictures = Picture.objects.order_by('-creation_date')[:3]
     new_categories = Category.objects.order_by('-creation_date')[:5]
 

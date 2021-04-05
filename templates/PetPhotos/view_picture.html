@@ -13,7 +13,7 @@
 
         {% if picture %}
 
-            <img src="{{ picture.picture.url }}" alt="img">
+            <img src="{{ picture.picture.url }}" alt="img" class="bigimg">
             <br>
             {% if user.is_authenticated %}
                 <form action="{% url 'PetPhotos:like_post' picture.id %}" method="POST">
