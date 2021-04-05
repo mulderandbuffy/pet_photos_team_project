@@ -3,7 +3,6 @@
 
 {% extends 'PetPhotos/base.html' %}
 {% load static %}
-{% load pp_template_tags %}
 
 {% block title_block %}
     {% if category %}
@@ -27,6 +26,7 @@
                 <strong>No pictures currently in category.</strong>
             {% endif %}
         </div>
+
     {% else %}
         This category doesn't exist.
     {% endif %}
