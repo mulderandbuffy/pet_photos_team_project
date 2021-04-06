@@ -15,6 +15,18 @@
 
     {% if picture %}
 
+         {% if user.id == picture.creator.id %}
+
+            <form action="{% url 'PetPhotos:del_pic' picture.id picture.category.slug %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" name="delete" pic_id="{{ picture.id }}" cat_id="{{ picture.category.id }}"
+                        class="btn btn-outline-dark">Delete</button>
+
+            </form>
+         {% endif %}
+
+        <br>
+
         <img src="{{ picture.picture.url }}" alt="img" class="view_pic">
 
         <br>
@@ -33,6 +45,7 @@
 
 
             </form>
+
         {% endif %}
 
         <a>Number of Likes: {{ likes }}</a>
@@ -68,7 +81,8 @@
                             <form action="{% url 'PetPhotos:del_comment' picture.id comment.id %}" method="POST">
                                 {% csrf_token %}
 
-                                     <button type="submit" name="delete" com_id="{{ comment.id }}" pic_id="{{ picture.id }}" class="btn btn-outline-dark">Delete</button>
+                                <button type="submit" name="delete" com_id="{{ comment.id }}" pic_id="{{ picture.id }}"
+                                        class="btn btn-outline-dark">Delete</button>
 
                             </form>
                         {% endif %}

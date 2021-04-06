@@ -11,6 +11,10 @@
 {% block body_block %}
     <h1>Add a Picture</h1>
     <div>
+        <br>
+        Add a pet picture to a category!
+        <br>
+        <br>
         <form id="category_form" method="post" action="{% url 'PetPhotos:add_picture' %}"enctype="multipart/form-data">
 
             {% csrf_token %}

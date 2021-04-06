@@ -6,7 +6,8 @@ from django.template.defaultfilters import slugify
 
 """
     Pet model is made up of: name, reference to the owner user, picture of the animal, and slug which is created
-    internally when we create an instance of the model
+    internally when we create an instance of the model. Slug is a combination of owners username and pet name, so 
+    that 2 different users can have pets with the same name.
 """
 
 
@@ -17,7 +18,8 @@ class Pet(models.Model):
     slug = models.SlugField(unique=True, default='')
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        slug_str = "%s-%s" % (self.owner, self.name)
+        self.slug = slugify(slug_str)
         super(Pet, self).save(*args, **kwargs)
 
     def __str__(self):

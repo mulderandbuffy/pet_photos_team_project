@@ -202,6 +202,13 @@ def add_pet(request):
     if request.method == 'POST':
         form = PetForm(request.POST, request.FILES)
 
+        name = request.POST.get('name')
+        owner = request.user
+
+        if Pet.objects.filter(name=name, owner=owner).exists():
+            p = Pet.objects.get(name=name, owner=owner)
+            return HttpResponseRedirect(reverse('PetPhotos:view_pet_profile', args=[str(p.slug)]))
+
         if form.is_valid():
             pet = form.save(commit=False)
             pet.owner = request.user
@@ -371,3 +378,27 @@ def like_view(request, id):
 def del_comment(request, pic_id, com_id):
     Comment.objects.filter(id=com_id).delete()
     return HttpResponseRedirect(reverse('PetPhotos:view_picture', args=[str(pic_id)]))
+
+
+"""
+    del_pet view is a delete button that is displayed next to every pet picture of a logged-in user, so he can delete
+    the pet from his profile
+"""
+
+
+@login_required
+def del_pet(request, pet_id, own_id):
+    Pet.objects.filter(slug=pet_id).delete()
+    return HttpResponseRedirect(reverse('PetPhotos:user_profile', args=[str(own_id)]))
+
+
+"""
+    del_pic view is a delete button that is displayed above every picture that the logged-in user crated , so he can 
+    delete the picture from the category
+"""
+
+
+@login_required
+def del_pic(request, pic_id, cat_id):
+    Picture.objects.filter(id=pic_id).delete()
+    return HttpResponseRedirect(reverse('PetPhotos:show_category', args=[str(cat_id)]))
