@@ -43,6 +43,8 @@
 
         <h2>Comments</h2>
 
+        <br>
+
         <form method="post">
             {% if user.is_authenticated %}
                 {% csrf_token %}
@@ -51,16 +53,28 @@
             {% endif %}
         </form>
 
-        <br>
-        <br>
         {% if comments %}
             <hr>
             {% for comment in comments %}
-                <strong> {{ comment.creator }} - {{ comment.creation_date }} </strong>
-                <br>
-                {{ comment.comment }}
-                <br>
-                <hr>
+                <div class="comment">
+                    <div class="comment_text">
+                    <strong> {{ comment.creator }} - {{ comment.creation_date }} </strong>
+                    <br>
+                    {{ comment.comment }}
+                    </div>
+                    <div class="del_b">
+                        {% if user.id == comment.creator.id %}
+
+                            <form action="{% url 'PetPhotos:del_comment' picture.id comment.id %}" method="POST">
+                                {% csrf_token %}
+
+                                     <button type="submit" name="delete" com_id="{{ comment.id }}" pic_id="{{ picture.id }}" class="btn btn-outline-dark">Delete</button>
+
+                            </form>
+                        {% endif %}
+                    </div>
+                    <hr>
+                </div>
             {% endfor %}
         {% else %}
              No comments yet...
