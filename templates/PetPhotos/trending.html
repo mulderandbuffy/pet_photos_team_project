@@ -39,6 +39,7 @@
     <div><!--New Categories-->
         <h4>New Categories</h4>
         {% if cats %}
+        |
             {% for c in cats %}
                 <a href="{% url 'PetPhotos:show_category' c.slug %}">{{ c.name }}</a> |
             {% endfor %}
