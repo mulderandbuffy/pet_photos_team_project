@@ -202,6 +202,13 @@ def add_pet(request):
     if request.method == 'POST':
         form = PetForm(request.POST, request.FILES)
 
+        name = request.POST.get('name')
+        owner = request.user
+
+        if Pet.objects.filter(name=name, owner=owner).exists():
+            p = Pet.objects.get(name=name, owner=owner)
+            return HttpResponseRedirect(reverse('PetPhotos:view_pet_profile', args=[str(p.slug)]))
+
         if form.is_valid():
             pet = form.save(commit=False)
             pet.owner = request.user
