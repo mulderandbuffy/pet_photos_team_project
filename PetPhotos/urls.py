@@ -18,6 +18,7 @@ urlpatterns = [
     path('like/<slug:id>/', views.like_view, name='like_post'),
     path('delete/<slug:pic_id>/<slug:com_id>', views.del_comment, name='del_comment'),
     path('delete_pet/<slug:pet_id>/<slug:own_id>', views.del_pet, name='del_pet'),
+    path('delete_pic/<slug:pic_id>/<slug:cat_id>', views.del_pic, name='del_pic'),
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),

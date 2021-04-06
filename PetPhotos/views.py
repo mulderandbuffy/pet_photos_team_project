@@ -383,3 +383,15 @@ def del_comment(request, pic_id, com_id):
 def del_pet(request, pet_id, own_id):
     Pet.objects.filter(slug=pet_id).delete()
     return HttpResponseRedirect(reverse('PetPhotos:user_profile', args=[str(own_id)]))
+
+
+"""
+    del_pic view is a delete button that is displayed above every picture that the logged-in user crated , so he can 
+    delete the picture from the category
+"""
+
+
+@login_required
+def del_pic(request, pic_id, cat_id):
+    Picture.objects.filter(id=pic_id).delete()
+    return HttpResponseRedirect(reverse('PetPhotos:show_category', args=[str(cat_id)]))
