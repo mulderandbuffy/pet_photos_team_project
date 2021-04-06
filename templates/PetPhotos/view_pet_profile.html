@@ -19,6 +19,14 @@
         <p><b>Owner:</b> {{ pet.owner }}</p>
         <img src="{{ pet.picture.url }}" alt="img" class="nolink">
     </div>
+    {% if user.id == pet.owner.id %}
+        <form action="{% url 'PetPhotos:del_pet' pet.slug pet.owner.username %}" method="POST">
+            {% csrf_token %}
+
+             <button type="submit" name="delete" own_id ="{{ pet.owner.username }}" pet_id ="{{ pet.slug }}" class="btn btn-outline-dark">Delete</button>
+
+        </form>
+    {% endif %}
     {% else %}
         This pet doesn't exist.
     {% endif %}
