@@ -9,7 +9,7 @@ Team 5f:
 
 Acknowledgements:
 -   Home Page Photo:
-    - Source code: https://pnghut.com/png/3ifdc0VNYx/dog-animal-shelter-pet-adoption-cat-transparent-png
+    - Source: https://pnghut.com/png/3ifdc0VNYx/dog-animal-shelter-pet-adoption-cat-transparent-png
 -   Bootstrap (also reffered to in base.html): 
     -  Website: https://getbootstrap.com/docs/4.2/getting-started/introduction/
     -  Source codes: 
