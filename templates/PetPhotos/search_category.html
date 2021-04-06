@@ -13,11 +13,15 @@
     <div>
         {% if searched %}
             <h2>You searched for: {{ searched }}</h2>
-
-            {% for cat in categories_sug %}
-                <a href="{% url 'PetPhotos:show_category' cat.slug %}">{{ cat.name }}</a><br>
-            {% endfor %}
-
+            {% if categories_sug %}
+                Your search matched these categories:
+                <br>
+                {% for cat in categories_sug %}
+                    <a href="{% url 'PetPhotos:show_category' cat.slug %}">{{ cat.name }}</a><br>
+                {% endfor %}
+            {% else %}
+                We couldn't find any categories matching your search term!
+            {% endif %}
         {% endif %}
     </div>
 {% endblock %}
