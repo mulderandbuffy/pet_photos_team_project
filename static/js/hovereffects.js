@@ -8,3 +8,4 @@ function hoverer(img) {
 function dehoverer(img) {
     img.style.opacity = "0.8"
 }
+// Functions that highlight an image when hovered over. Called from individual elements.
