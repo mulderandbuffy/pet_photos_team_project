@@ -10,7 +10,7 @@ from django.utils import timezone
 
 
 class CategoryForm(forms.ModelForm):
-    name = forms.CharField(max_length=128, help_text="Please enter the category name.")
+    name = forms.CharField(max_length=128, help_text="Please enter the category name. Max 128 characters.")
     creation_date = timezone.now()
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
@@ -25,7 +25,7 @@ class CategoryForm(forms.ModelForm):
 
 
 class PetForm(forms.ModelForm):
-    name = forms.CharField(max_length=128, help_text="Pet Name")
+    name = forms.CharField(max_length=128, help_text="Please enter the pet name. Max 128 characters.")
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
@@ -67,7 +67,8 @@ class UserForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
-    comment = forms.CharField(widget=forms.TextInput(attrs={'size': 80}))
+    comment = forms.CharField(max_length=300, widget=forms.TextInput(attrs={'size': 80}),
+                              help_text="Max 300 characters.")
     creation_date = timezone.now()
 
     class Meta:
