@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from PetPhotos.models import Category, Picture, Pet, Comment
@@ -143,8 +144,8 @@ def register(request):
             user = user_form.save()
             user.set_password(user.password)
             user.save()
-            registered = True
-
+            login(request, user)
+            return redirect(reverse('PetPhotos:index'))
         else:
             print(user_form.errors)
 
@@ -152,7 +153,6 @@ def register(request):
         user_form = UserForm()
 
     context_dict['user_form'] = user_form
-    context_dict['registered'] = registered
 
     return render(request, 'PetPhotos/register.html', context=context_dict)
 
@@ -200,7 +200,7 @@ def add_pet(request):
     form = PetForm()
 
     if request.method == 'POST':
-        form = PetForm(request.POST)
+        form = PetForm(request.POST, request.FILES)
 
         if form.is_valid():
             pet = form.save(commit=False)
@@ -232,7 +232,7 @@ def add_picture(request):
     form = PictureForm()
 
     if request.method == 'POST':
-        form = PictureForm(request.POST)
+        form = PictureForm(request.POST, request.FILES)
 
         if form.is_valid():
             picture = form.save(commit=False)
@@ -305,28 +305,6 @@ def view_picture(request, id):
 
 
 """
-    like_view view is a like button that also takes into account whether the user already liked the button, so he can 
-    unlike the picture
-"""
-
-
-@login_required
-def like_view(request, id):
-    picture = get_object_or_404(Picture, id=request.POST.get('post_id'))
-    liked = False
-
-    if picture.likes.filter(id=request.user.id).exists():
-        picture.likes.remove(request.user)
-        liked = False
-
-    else:
-        picture.likes.add(request.user)
-        liked = True
-
-    return HttpResponseRedirect(reverse('PetPhotos:view_picture', args=[str(id)]))
-
-
-"""
     search_category view takes as an input the searched string from the search bar and displays all the categories that 
     contain the string anywhere. For instance, if we search for "sh" the list would display "shellfish" as well as 
     "jellyfish" if they both were in the category list.
@@ -353,8 +331,42 @@ def search_category(request):
 
 def trending(request):
     context_dict = {'results': Category.objects.all(),
-                    'liked': Picture.objects.order_by('-likes')[:5],
+                    'liked': Picture.objects.annotate(q_count=Count('likes')).order_by('-q_count')[:5],
                     'newpics': Picture.objects.order_by('-creation_date')[:5],
                     'cats': Category.objects.order_by('-creation_date')[:5]}
 
     return render(request, 'PetPhotos/trending.html', context=context_dict)
+
+
+"""
+    like_view view is a like button that also takes into account whether the user already liked the button, so he can 
+    unlike the picture
+"""
+
+
+@login_required
+def like_view(request, id):
+    picture = get_object_or_404(Picture, id=request.POST.get('post_id'))
+    liked = False
+
+    if picture.likes.filter(id=request.user.id).exists():
+        picture.likes.remove(request.user)
+        liked = False
+
+    else:
+        picture.likes.add(request.user)
+        liked = True
+
+    return HttpResponseRedirect(reverse('PetPhotos:view_picture', args=[str(id)]))
+
+
+"""
+    del_comment view is a delete button that is displayed next to every comment of a logged-in user, so he can delete
+    the comment
+"""
+
+
+@login_required
+def del_comment(request, pic_id, com_id):
+    Comment.objects.filter(id=com_id).delete()
+    return HttpResponseRedirect(reverse('PetPhotos:view_picture', args=[str(pic_id)]))
