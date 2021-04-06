@@ -204,7 +204,6 @@ def add_pet(request):
 
         if form.is_valid():
             pet = form.save(commit=False)
-
             pet.owner = request.user
 
             if 'picture' in request.FILES:
