@@ -10,17 +10,26 @@
 {% endblock %}
 
 {% block body_block %}
-    <h1>Login to PetPhotos</h1>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-3">Login to PetPhotos</h1>
+    </div>
+</div>
+    <hr>
+    <div>
     <div>
         <form id="login_form" method="post" action="{% url 'PetPhotos:login' %}">
 
         {% csrf_token %}
 
-        Username: <input type="text" name="username" value="" size="50" />
+        <div class="textForm">
+        <input type="text" placeholder="Username"name="username" value="" size="50" class="form-control"/>
         <br />
-        Password: <input type="password" name="password" value="" size="50" /> <br />
+        <input type="password" placeholder="Password" name="password" value="" size="50" class="form-control" /> <br />
 
-        <input type="submit" value="submit" />
+        <input class="btn btn-success " type="submit" value="Submit" />
+    </div>
         </form>
     </div>
+</div>
 {% endblock %}

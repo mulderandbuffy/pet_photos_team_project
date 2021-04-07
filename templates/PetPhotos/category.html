@@ -14,7 +14,12 @@
 
 {% block body_block %}
     {% if category %}
-        <h1>{{ category.name }}</h1>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-3">{{category.name}}</h1>
+        </div>
+    </div>
+        <hr>
         <div>
             {% if pictures %}
 

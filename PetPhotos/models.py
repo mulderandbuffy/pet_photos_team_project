@@ -53,6 +53,7 @@ class Category(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
+        self.name = self.name.capitalize()
         super(Category, self).save(*args, **kwargs)
 
     class Meta:

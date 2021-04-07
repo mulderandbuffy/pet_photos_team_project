@@ -8,12 +8,15 @@
 {% endblock %}
 
 {% block body_block %}
-    <h1>Add a Pet</h1>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-3">Add a Pet</h1>
+      <p class="lead">Add a new pet to your profile</p>
+    </div>
+</div>
+
     <div>
-        <br>
-        Add your pet to your profile!
-        <br>
-        <br>
+        <hr>
         <form id="category_form" method="post" action="{% url 'PetPhotos:add_pet' %}" enctype="multipart/form-data">
 
             {% csrf_token %}
@@ -24,11 +27,10 @@
 
             {% for field in form.visible_fields %}
                 {{ field.errors }}
-                {{ field.help_text }}
                 {{ field }}
             {% endfor %}
 
-            <input type="submit" name="submit" value="Create Pet" />
+            <input type="submit" name="submit" value="Create Pet" class="btn btn-success" />
         </form>
     </div>
 {% endblock %}

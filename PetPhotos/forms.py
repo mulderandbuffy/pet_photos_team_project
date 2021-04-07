@@ -10,7 +10,8 @@ from django.utils import timezone
 
 
 class CategoryForm(forms.ModelForm):
-    name = forms.CharField(max_length=128, help_text="Please enter the category name. Max 128 characters.")
+    name = forms.CharField(max_length=128, help_text="Please enter the category name. Max 128 characters.", widget=forms.TextInput(attrs={'class': 'form-control', 
+                                                    'placeholder': 'Category Name'}))
     creation_date = timezone.now()
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
@@ -25,12 +26,14 @@ class CategoryForm(forms.ModelForm):
 
 
 class PetForm(forms.ModelForm):
-    name = forms.CharField(max_length=128, help_text="Please enter the pet name. Max 128 characters.")
+    name = forms.CharField(max_length=128, help_text="Please enter the pet name. Max 128 characters.", widget=forms.TextInput(attrs={'class':'form-control', 
+                                                        'placeholder': 'Pet Name'}))
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
         model = Pet
         fields = ('name', 'picture')
+        widgets = {'picture': forms.FileInput(attrs={'class': 'btn btn-outline-secondary'})}
 
 
 """
@@ -40,12 +43,14 @@ class PetForm(forms.ModelForm):
 
 
 class PictureForm(forms.ModelForm):
-    category = forms.ModelChoiceField(queryset=Category.objects.all().order_by('name'), label='Select Category')
+    category = forms.ModelChoiceField(queryset=Category.objects.all().order_by('name'), label='Select Category', 
+                    widget=forms.Select(attrs={'class': 'form-control', 'placeholder':'Category'}), help_text="Choose a Category")
     creation_date = timezone.now()
 
     class Meta:
         model = Picture
         fields = ('category', 'picture')
+        widgets = {'picture': forms.FileInput(attrs={'class': 'btn btn-outline-secondary'})}
 
 
 """
@@ -54,11 +59,15 @@ class PictureForm(forms.ModelForm):
 
 
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control', 'placeholder': 'Password'}), label='')
 
     class Meta:
         model = User
         fields = ('username', 'email', 'password')
+        widgets = {'username': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Username - 150 characters or fewer. Letters, digits and @/./+/-/_ only', 'aria-describedby':'usernameHelp'}),
+                    'email': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Email Address', 'aria-describedby':'usernameHelp'})}
+        labels = {'username': '', 'email': ''}
+        help_texts = {'username': ''}
 
 
 """
@@ -67,7 +76,7 @@ class UserForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
-    comment = forms.CharField(max_length=300, widget=forms.TextInput(attrs={'size': 80}),
+    comment = forms.CharField(max_length=300, widget=forms.TextInput(attrs={'size': 80, 'class':'form-control', 'placeholder':'Comment'}),
                               help_text="Max 300 characters.")
     creation_date = timezone.now()
 

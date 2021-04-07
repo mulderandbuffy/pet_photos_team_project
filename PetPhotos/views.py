@@ -117,7 +117,7 @@ def add_category(request):
 
         if form.is_valid():
             form.save(commit=True)
-            return redirect('/PetPhotos/')
+            return redirect('PetPhotos:index')
 
         else:
             print(form.errors)
@@ -217,7 +217,7 @@ def add_pet(request):
                 pet.picture = request.FILES['picture']
 
             pet.save()
-            return redirect('/PetPhotos/')
+            return HttpResponseRedirect(reverse('PetPhotos:view_pet_profile', args=[str(pet.slug)]))
 
         else:
             print(form.errors)
@@ -249,7 +249,7 @@ def add_picture(request):
                 picture.picture = request.FILES['picture']
 
             picture.save()
-            return redirect('/PetPhotos/')
+            return redirect('PetPhotos:index')
 
         else:
             print(form.errors)

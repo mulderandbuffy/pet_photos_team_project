@@ -9,13 +9,15 @@
 
 
 {% block body_block %}
-    <h1>Add a Picture</h1>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+        <h1 class="display-3">Add a Picture</h1>
+        <p class="lead">Add a new picture to a category</p>
+        </div>
+    </div>
+    <hr>
     <div>
-        <br>
-        Add a pet picture to a category!
-        <br>
-        <br>
-        <form id="category_form" method="post" action="{% url 'PetPhotos:add_picture' %}"enctype="multipart/form-data">
+        <form id="category_form" method="post" action="{% url 'PetPhotos:add_picture' %}"enctype="multipart/form-data" >
 
             {% csrf_token %}
 
@@ -29,7 +31,7 @@
                 {{ field }}
             {% endfor %}
 
-            <input type="submit" name="submit" value="Create Picture" />
+            <input type="submit" name="submit" value="Create Picture" class="btn btn-success"/>
         </form>
     </div>
 {% endblock %}

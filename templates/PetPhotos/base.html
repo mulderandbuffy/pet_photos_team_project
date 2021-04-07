@@ -62,7 +62,7 @@
 
                         <form class="d-flex" id="d-flex" method=POST action="{% url 'PetPhotos:search_category' %}">
                             {% csrf_token %}
-                            <input class="form-control me-2" id="tags" type="search" list="categorylist" placeholder="Search Categories" name="searched">
+                            <input class="form-control mr-sm-2" id="tags" type="search" list="categorylist" placeholder="Search Categories" name="searched">
                             <datalist id="categorylist">
                                 {% for res in results %}
                                     <option value="{{ res.name }}"></option>
@@ -84,6 +84,14 @@
                 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
                     <div class="sidebar-sticky">
                     {% block sidebar_block %}
+                    <div class="centred" style="vertical-align: center;">
+                        {% if user.is_authenticated %}
+                        <p class="authindicator">Logged in as {{user.username}}</p>
+                        {% else %}
+                        <p class="authindicator">Not logged in<p>
+                        {% endif %}
+                    </div><hr>
+                    <p class="centred">All Categories</p>
                         {% get_category_list category %}
                     {% endblock %}
                     </div>
@@ -96,7 +104,7 @@
                     <footer class="footer">
                         <hr>
                         <p id="up_bit" class="float-right"><a href="#">Back to top</a></p>
-                        <p id="up_bit_too">&copy; 2021 WAD2 Team 5F &middot;</p>
+                        <p id="up_bit_too" class="float-left">&copy; 2021 WAD2 Team 5F &middot;</p>
                     </footer>
 
             </div>

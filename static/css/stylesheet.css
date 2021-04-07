@@ -25,6 +25,9 @@ img.homeimg{
 .d-flex{
     display: flex;
     float: right;
+    padding-right: .25rem;
+    padding-top: .25rem;
+    padding-bottom: .25rem;
     margin-bottom: auto;
 }
 
@@ -75,11 +78,13 @@ img.nolink{
 
 #search_b{
     border-radius: 5px;
+    vertical-align: center;
 }
 
 .container-fluid {
   position: relative;
   min-height: 100vh;
+  background-color: #fffeff;
 }
 
 #main {
@@ -112,4 +117,32 @@ img.nolink{
 
 .del_b{
   padding-top:10px;
+}
+
+.main {
+    background-color: rgb(221, 231, 231);
+}
+
+.newcats{
+    margin-top: 1rem;
+}
+
+.catlist{
+    margin-left: .5rem;
+    margin-right: .5rem;
+}
+
+.authindicator{
+    color: #343A40
+}
+
+.categorybuttons{
+    margin-left: .5rem;
+    margin-right: .5rem;
+}
+
+.textForm{
+    margin-right: 30%;
+    margin-left: 30%;
+    text-align: center;
 }
