@@ -15,18 +15,29 @@
 {% block body_block %}
     {% if user %}
         <h1> User Profile</h1>
+        <hr>
         <div>
-            <p>Username: {{ user.username }}</p>
-            <p>Email: {{ user.email }}</p>
+            <h4>Username: {{ user.username }}</h4>
             <p>Last Login: {{ user.last_login }}</p>
+            <hr>
+        </div>
 
             <!--List the user's pets-->
-
-            <p>Pets:</p>
+        <div>
+            <h2>Pets:</h2>
             {% if pets %}
+                <div class="container.fluid">
+                <div class="row justify-content-start">
                 {% for p in pets %}
-                    <li><a href="{% url 'PetPhotos:view_pet_profile' p.slug %}">{{ p.name }}</a></li>
+                    <div class="col" style="padding: 10px;">
+                    <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{p.picture.url}}" alt="Image of {{p.name}}">
+                    <div class="card-body">
+                      <h5 class="card-title">{{p.name}}</h5>
+                      <a class= "btn btn-primary" href="{% url 'PetPhotos:view_pet_profile' p.slug %}">View</a>
+                    </div> </div></div>
                 {% endfor %}
+            </div></div>
             {% else %}
                 This user has no pets.
             {% endif %}

@@ -5,16 +5,14 @@
 
 
 <!--Template to create list of catgeories in the datatbase - used in the sidebar-->
-<ul>
     {% if categories %}
         {% for c in categories %}
             {% if c == current_category %}
-                <li><strong><a href="{% url 'PetPhotos:show_category' c.slug %}">{{c.name}}</a></strong></li>
+                <a href="{% url 'PetPhotos:show_category' c.slug %}" class="btn btn-primary btn-block">{{c.name}}</a>
             {% else %}
-                <li><a href="{% url 'PetPhotos:show_category' c.slug %}">{{c.name}}</a></li>
+                <a href="{% url 'PetPhotos:show_category' c.slug %}" class="btn btn-outline-secondary btn-block">{{c.name}}</a>
             {% endif %}
         {% endfor %}
     {% else %}
         <li><strong>No categories to show</strong></li>
     {% endif %}
-</ul>

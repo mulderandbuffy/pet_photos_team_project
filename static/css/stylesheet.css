@@ -113,3 +113,7 @@ img.nolink{
 .del_b{
   padding-top:10px;
 }
+
+body {
+    background-color: rgb(221, 231, 231);
+}

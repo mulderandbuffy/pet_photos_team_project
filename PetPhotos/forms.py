@@ -54,11 +54,15 @@ class PictureForm(forms.ModelForm):
 
 
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control', 'placeholder': 'Password'}), label='')
 
     class Meta:
         model = User
         fields = ('username', 'email', 'password')
+        widgets = {'username': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Username - 150 characters or fewer. Letters, digits and @/./+/-/_ only', 'aria-describedby':'usernameHelp'}),
+                    'email': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Email Address', 'aria-describedby':'usernameHelp'})}
+        labels = {'username': '', 'email': ''}
+        help_texts = {'username': ''}
 
 
 """
