@@ -11,10 +11,19 @@
 {% block body_block %}
     {% if profiles %}
         <h1>Profiles:</h1>
+        <hr>
         <div>
-            {% for p in profiles %}
-                <li><strong><a href="{% url 'PetPhotos:user_profile' p.username %}">{{ p.username }}</a></strong></li>
-            {% endfor %}
+            <div class="container.fluid">
+                <div class="row justify-content-start">
+                {% for p in profiles %}
+                    <div class="col" style="padding: 10px;">
+                    <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                    <h5 class="card-title">{{p.username}}</h5>
+                    <a class= "btn btn-outline-primary btn-block" href="{% url 'PetPhotos:user_profile' p.username %}">View Pets</a>
+                    </div> </div></div>
+                {% endfor %}
+            </div></div>
         </div>
     {% else %}
         No user exists.

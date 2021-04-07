@@ -10,15 +10,21 @@
 
 {% block body_block %}
     <h1>Search Results</h1>
+    <hr>
     <div>
         {% if searched %}
             <h2>You searched for: {{ searched }}</h2>
             {% if categories_sug %}
-                Your search matched these categories:
+                <h6>Your search matched these categories:</h6>
                 <br>
+                <div class="container.fluid">
+                <div class="row justify-content-start">
                 {% for cat in categories_sug %}
-                    <a href="{% url 'PetPhotos:show_category' cat.slug %}">{{ cat.name }}</a><br>
+                <div class="col">
+                    <a href="{% url 'PetPhotos:show_category' cat.slug %}" class="btn btn-outline-primary btn-block">{{ cat.name }}</a><br>
+                </div>
                 {% endfor %}
+                </div></div>
             {% else %}
                 We couldn't find any categories matching your search term!
             {% endif %}

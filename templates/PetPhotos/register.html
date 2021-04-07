@@ -10,10 +10,15 @@
 {% endblock %}
 
 {% block body_block %}
-<div class="centred">
-    <h1> Register for PetPhotos</h1>
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-3">Register for PetPhotos</h1>
+        </div>
+    </div>
+    <div class="centred">
     <hr>
-    <div>
+    <div class="textForm">
         <h3>Please register here.</h3><br />
         <form id="user_form" method="post" action="{% url 'PetPhotos:register' %}" enctype = "multipart/form-data">
 

@@ -26,12 +26,14 @@ class CategoryForm(forms.ModelForm):
 
 
 class PetForm(forms.ModelForm):
-    name = forms.CharField(max_length=128, help_text="Please enter the pet name. Max 128 characters.")
+    name = forms.CharField(max_length=128, help_text="Please enter the pet name. Max 128 characters.", widget=forms.TextInput(attrs={'class':'form-control', 
+                                                        'placeholder': 'Pet Name'}))
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
         model = Pet
         fields = ('name', 'picture')
+        widgets = {'picture': forms.FileInput(attrs={'class': 'btn btn-outline-secondary'})}
 
 
 """
@@ -41,12 +43,14 @@ class PetForm(forms.ModelForm):
 
 
 class PictureForm(forms.ModelForm):
-    category = forms.ModelChoiceField(queryset=Category.objects.all().order_by('name'), label='Select Category')
+    category = forms.ModelChoiceField(queryset=Category.objects.all().order_by('name'), label='Select Category', 
+                    widget=forms.Select(attrs={'class': 'form-control', 'placeholder':'Category'}), help_text="Choose a Category")
     creation_date = timezone.now()
 
     class Meta:
         model = Picture
         fields = ('category', 'picture')
+        widgets = {'picture': forms.FileInput(attrs={'class': 'btn btn-outline-secondary'})}
 
 
 """

@@ -14,9 +14,11 @@
 {% block body_block %}
     {% if pet %}
     <h1> Pet Profile</h1>
+    <hr>
     <div>
-        <p><b>Name:</b> {{ pet.name }}</p>
-        <p><b>Owner:</b> {{ pet.owner }}</p>
+        <h4>Name: {{ pet.name }}</h4>
+        <p><b>Owner:</b> <a href="{% url 'PetPhotos:user_profile' pet.owner %}">{{ pet.owner }}</a></p>
+        <hr>
         <img src="{{ pet.picture.url }}" alt="img" class="nolink">
     </div>
     {% if user.id == pet.owner.id %}

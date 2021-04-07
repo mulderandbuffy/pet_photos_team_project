@@ -135,3 +135,14 @@ img.nolink{
 .authindicator{
     color: #343A40
 }
+
+.categorybuttons{
+    margin-left: .5rem;
+    margin-right: .5rem;
+}
+
+.textForm{
+    margin-right: 30%;
+    margin-left: 30%;
+    text-align: center;
+}
