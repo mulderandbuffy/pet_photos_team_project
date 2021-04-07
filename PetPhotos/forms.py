@@ -10,7 +10,8 @@ from django.utils import timezone
 
 
 class CategoryForm(forms.ModelForm):
-    name = forms.CharField(max_length=128, help_text="Please enter the category name. Max 128 characters.")
+    name = forms.CharField(max_length=128, help_text="Please enter the category name. Max 128 characters.", widget=forms.TextInput(attrs={'class': 'form-control', 
+                                                    'placeholder': 'Category Name'}))
     creation_date = timezone.now()
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
@@ -71,7 +72,7 @@ class UserForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
-    comment = forms.CharField(max_length=300, widget=forms.TextInput(attrs={'size': 80}),
+    comment = forms.CharField(max_length=300, widget=forms.TextInput(attrs={'size': 80, 'class':'form-control', 'placeholder':'Comment'}),
                               help_text="Max 300 characters.")
     creation_date = timezone.now()
 

@@ -9,12 +9,11 @@
 
 {% block body_block %}
     <h1>Add a Category</h1>
+    <hr>
     <div>
         <br>
-        Add a category of animals!
-        <br>
-        <br>
-        <form id="category_form" method="post" action="{% url 'PetPhotos:add_category' %}">
+        <h6>Add a new category of animal!</h6>
+        <form id="category_form" method="post" action="{% url 'PetPhotos:add_category' %}" class="form-inline">
 
             {% csrf_token %}
 
@@ -24,11 +23,10 @@
 
             {% for field in form.visible_fields %}
                 {{ field.errors }}
-                {{ field.help_text }}
                 {{ field }}
             {% endfor %}
 
-            <input type="submit" name="submit" value="Create Category" />
+            <input type="submit" name="submit" class="btn btn-success" value="Create Category" />
         </form>
     </div>
 {% endblock %}

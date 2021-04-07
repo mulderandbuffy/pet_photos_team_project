@@ -10,6 +10,7 @@
 
 {% block body_block %}
     <h1>Trending</h1>
+    <hr>
     <div> <!--Most Liked Images-->
         <h4>Most Liked Pictures</h4>
         {% if liked %}
@@ -21,7 +22,7 @@
         {% endif %}
     </div>
 
-    <br>
+    <br><hr>
 
     <div> <!--New Images-->
     <h4>New Pictures</h4>
@@ -34,17 +35,20 @@
         {% endif %}
     </div>
 
-    <br>
+    <br><hr>
 
     <div><!--New Categories-->
         <h4>New Categories</h4>
         {% if cats %}
-        |
+        <div class="row newcats">
             {% for c in cats %}
-                <a href="{% url 'PetPhotos:show_category' c.slug %}">{{ c.name }}</a> |
+                <div class="col">
+                <a href="{% url 'PetPhotos:show_category' c.slug %}" class="btn btn-outline-primary btn-block">{{ c.name }}</a>
+            </div>
             {% endfor %}
         {% else %}
             <strong>Nothing to See here...</strong>
         {% endif %}
+    </div>
     </div>
 {% endblock %}
