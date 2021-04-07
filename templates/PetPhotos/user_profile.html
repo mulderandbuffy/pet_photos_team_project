@@ -14,7 +14,11 @@
 
 {% block body_block %}
     {% if user %}
-        <h1> User Profile</h1>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">User Profile</h1>
+        </div>
+    </div>
         <hr>
         <div>
             <h4>Username: {{ user.username }}</h4>
