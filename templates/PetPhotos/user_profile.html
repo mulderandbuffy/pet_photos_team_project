@@ -5,15 +5,15 @@
 {% load static %}
 
 {% block title_block %}
-    {% if user %}
-        {{ user.username }}
+    {% if u %}
+        {{ u.username }}
     {% else %}
         Unknown User
     {% endif %}
 {% endblock %}
 
 {% block body_block %}
-    {% if user %}
+    {% if u %}
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
           <h1 class="display-4">User Profile</h1>
@@ -21,8 +21,8 @@
     </div>
         <hr>
         <div>
-            <h4>Username: {{ user.username }}</h4>
-            <p>Last Login: {{ user.last_login }}</p>
+            <h4>Username: {{ u.username }}</h4>
+            <p>Last Login: {{ u.last_login }}</p>
             <hr>
         </div>
 

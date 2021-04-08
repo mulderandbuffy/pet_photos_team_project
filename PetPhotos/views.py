@@ -74,11 +74,11 @@ def user_profile(request, username):
     try:
         user = User.objects.get(username=username)
         pets = Pet.objects.filter(owner=User.objects.get(username=user.username))
-        context_dict['user'] = user
+        context_dict['u'] = user
         context_dict['pets'] = pets
 
     except User.DoesNotExist:
-        context_dict['user'] = None
+        context_dict['u'] = None
         context_dict['pets'] = None
 
     return render(request, 'PetPhotos/user_profile.html', context=context_dict)
