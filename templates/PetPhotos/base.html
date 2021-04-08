@@ -84,9 +84,10 @@
                 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
                     <div class="sidebar-sticky">
                     {% block sidebar_block %}
-                    <div class="centred" style="vertical-align: center;">
+                    <div class="centred categorybuttons" style="vertical-align: center;">
                         {% if user.is_authenticated %}
                         <p class="authindicator">Logged in as {{user.username}}</p>
+                        <a href="{% url 'PetPhotos:user_profile' user.username %}" class="btn btn-outline-secondary btn-block">My profile</a>
                         {% else %}
                         <p class="authindicator">Not logged in<p>
                         {% endif %}
