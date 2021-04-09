@@ -15,11 +15,11 @@
     {% if pet %}
     <h1> Pet Profile</h1>
     <hr>
-    <div>
+    <div class="container-fluid">
         <h4>Name: {{ pet.name }}</h4>
         <p><b>Owner:</b> <a href="{% url 'PetPhotos:user_profile' pet.owner %}">{{ pet.owner }}</a></p>
         <hr>
-        <img src="{{ pet.picture.url }}" alt="img" class="nolink">
+        <img src="{{ pet.picture.url }}" alt="img" class=" img-fluid">
     </div>
     {% if user.id == pet.owner.id %}
         <form action="{% url 'PetPhotos:del_pet' pet.slug pet.owner.username %}" method="POST">

@@ -52,8 +52,8 @@ class Category(models.Model):
     slug = models.SlugField(unique=True, default='')
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
         self.name = self.name.capitalize()
+        self.slug = slugify(self.name)
         super(Category, self).save(*args, **kwargs)
 
     class Meta:
