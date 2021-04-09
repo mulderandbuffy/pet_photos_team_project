@@ -16,10 +16,10 @@
     </div>
   </div>
     <hr>
-    <div>
+    <div class="textform">
         <br>
         <h6>Add a new category of animal!</h6>
-        <form id="category_form" method="post" action="{% url 'PetPhotos:add_category' %}" class="form-inline">
+        <form id="category_form" method="post" action="{% url 'PetPhotos:add_category' %}">
 
             {% csrf_token %}
 

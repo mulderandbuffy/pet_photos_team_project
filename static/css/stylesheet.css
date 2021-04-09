@@ -4,8 +4,8 @@ img.bigimg{
 }
 
 img.view_pic{
-    max-width: auto;
-    max-height: 400px;
+    max-height: 500px;
+    width: auto;
 }
 
 img.logo{
@@ -66,7 +66,7 @@ img.smallimg:hover {
 
 img.nolink{
     max-width: 700px;
-    max-height: auto;
+    height: auto;
     margin: 10px;
 }
 
@@ -132,7 +132,7 @@ img.nolink{
     margin-right: .5rem;
 }
 
-.authindicator{
+.sidebartext{
     color: #343A40
 }
 
@@ -145,4 +145,12 @@ img.nolink{
     margin-right: 30%;
     margin-left: 30%;
     text-align: center;
+}
+
+.sidebar-sticky {
+    background-color: #e7f0fa;
+}
+
+div.jumbotron{
+    background-color: #e7f0fa;
 }

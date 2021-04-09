@@ -86,13 +86,13 @@
                     {% block sidebar_block %}
                     <div class="centred categorybuttons" style="vertical-align: center;">
                         {% if user.is_authenticated %}
-                        <p class="authindicator">Logged in as {{user.username}}</p>
-                        <a href="{% url 'PetPhotos:user_profile' user.username %}" class="btn btn-outline-secondary btn-block">My profile</a>
+                        <p class="sidebartext">Logged in as {{user.username}}</p>
+                        <a href="{% url 'PetPhotos:user_profile' user.username %}" class="btn btn-outline-secondary btn-block">My Profile</a>
                         {% else %}
                         <p class="authindicator">Not logged in<p>
                         {% endif %}
                     </div><hr>
-                    <p class="centred">All Categories</p>
+                    <p class="centred sidebartext">All Categories</p>
                         {% get_category_list category %}
                     {% endblock %}
                     </div>
@@ -105,7 +105,7 @@
                     <footer class="footer">
                         <hr>
                         <p id="up_bit" class="float-right"><a href="#">Back to top</a></p>
-                        <p id="up_bit_too" class="float-left">&copy; 2021 WAD2 Team 5F &middot;</p>
+                        <p id="up_bit_too" class="float-right">&copy; 2021 WAD2 Team 5F &middot;</p>
                     </footer>
 
             </div>

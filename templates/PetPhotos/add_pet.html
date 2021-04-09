@@ -14,9 +14,9 @@
       <p class="lead">Add a new pet to your profile</p>
     </div>
 </div>
-
-    <div>
-        <hr>
+<hr>
+    <div class="textform">
+        
         <form id="category_form" method="post" action="{% url 'PetPhotos:add_pet' %}" enctype="multipart/form-data">
 
             {% csrf_token %}
