@@ -115,6 +115,12 @@ def add_category(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST)
 
+        name = request.POST.get('name').capitalize()
+
+        if Category.objects.filter(name=name).exists():
+            c = Category.objects.get(name=name)
+            return HttpResponseRedirect(reverse('PetPhotos:show_category', args=[str(c.slug)]))
+
         if form.is_valid():
             form.save(commit=True)
             return redirect('PetPhotos:index')
